@@ -260,10 +260,10 @@
         </nav>
     </div>
 
-    <!-- MODAL CHECKOUT PEMBAYARAN DINAMIS -->
+    <!-- MODAL CHECKOUT PEMBAYARAN DINAMIS (QRIS) -->
     <div id="checkout-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-3xl w-full max-w-sm overflow-hidden shadow-2xl p-6 space-y-4">
-            <h3 class="font-bold text-sm text-indigo-900"><i class="fa-solid fa-credit-card mr-2"></i> Konfirmasi Pembayaran</h3>
+            <h3 class="font-bold text-sm text-indigo-900"><i class="fa-solid fa-qrcode mr-2"></i> Konfirmasi Pembayaran QRIS</h3>
             <div class="bg-indigo-50 p-3 rounded-2xl border">
                 <h4 id="modal-prod-name" class="font-bold text-sm"></h4>
                 <p id="modal-prod-price" class="text-indigo-600 font-bold text-base mt-1"></p>
@@ -303,14 +303,14 @@
                     <p class="px-3 pt-3 pb-1 text-[10px] uppercase font-bold text-slate-500">Pengawasan & Katalog SPV</p>
                     <a href="#" onclick="switchAdminTab('posting')" id="nav-posting" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white text-violet-400"><i class="fa-solid fa-box-open w-4 text-center"></i><span>Katalog Dagangan & Hapus Post</span></a>
                     <a href="#" onclick="switchAdminTab('briva')" id="nav-briva" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white text-orange-400"><i class="fa-solid fa-bolt w-4 text-center"></i><span>Aktivasi Layanan Pembayaran</span></a>
-                    <a href="#" onclick="switchAdminTab('store-accounts')" id="nav-store-accounts" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white text-indigo-400"><i class="fa-solid fa-wallet w-4 text-center"></i><span>Rekening Tujuan Toko</span></a>
+                    <a href="#" onclick="switchAdminTab('store-accounts')" id="nav-store-accounts" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white text-indigo-400"><i class="fa-solid fa-wallet w-4 text-center"></i><span>Rekening & QRIS Toko</span></a>
                     <a href="#" onclick="switchAdminTab('customers')" id="nav-customers" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white text-teal-400"><i class="fa-solid fa-address-book w-4 text-center"></i><span>Approval Akun Pembeli</span><span id="badge-buyer-app" class="ml-auto bg-amber-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold hidden">0</span></a>
                     <a href="#" onclick="switchAdminTab('reports')" id="nav-reports" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white text-rose-400"><i class="fa-solid fa-chart-line w-4 text-center"></i><span>Laporan & Evaluasi Kas</span></a>
                 </div>
                 
                 <p class="px-3 pt-3 pb-1 text-[10px] uppercase font-bold text-slate-500">Keuangan & Kasir</p>
                 <a href="#" onclick="switchAdminTab('cash')" id="nav-cash" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white text-emerald-400"><i class="fa-solid fa-money-bill-wave w-4 text-center"></i><span>Verifikasi Tunai (Admin)</span></a>
-                <a href="#" onclick="switchAdminTab('noncash')" id="nav-noncash" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white text-blue-400"><i class="fa-solid fa-building-columns w-4 text-center"></i><span>Mutasi Online (Admin)</span></a>
+                <a href="#" onclick="switchAdminTab('noncash')" id="nav-noncash" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white text-blue-400"><i class="fa-solid fa-building-columns w-4 text-center"></i><span>Mutasi QRIS / Online (Admin)</span></a>
                 <a href="#" onclick="switchAdminTab('bills')" id="nav-bills" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white text-amber-400"><i class="fa-solid fa-handshake w-4 text-center"></i><span>Kasbon & Piutang (SPV)</span></a>
             </nav>
 
@@ -396,7 +396,7 @@
                         <p class="text-xs text-gray-500">Lakukan penutupan shift harian dan rekap total kas masuk sebelum menyerahkan tugas.</p>
                         <div class="bg-rose-50 p-4 rounded-xl border border-rose-100 space-y-2">
                             <div class="flex justify-between text-xs"><span class="font-semibold text-gray-600">Total Kas Tunai Terverifikasi:</span><span id="close-branch-cash" class="font-bold text-gray-900">Rp 0</span></div>
-                            <div class="flex justify-between text-xs"><span class="font-semibold text-gray-600">Total Transaksi Non-Tunai:</span><span id="close-branch-noncash" class="font-bold text-gray-900">Rp 0</span></div>
+                            <div class="flex justify-between text-xs"><span class="font-semibold text-gray-600">Total Transaksi Non-Tunai / QRIS:</span><span id="close-branch-noncash" class="font-bold text-gray-900">Rp 0</span></div>
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-600 mb-1">Catatan Shift / Kendala Kasir</label>
@@ -422,7 +422,7 @@
                     </div>
                 </section>
 
-                <!-- 3. MUTASI ONLINE -->
+                <!-- 3. MUTASI ONLINE / QRIS -->
                 <section id="tab-noncash" class="admin-tab hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border border-t-4 border-t-blue-500 p-6 overflow-x-auto">
                         <table class="w-full text-left text-sm">
@@ -470,7 +470,7 @@
                     </div>
                 </section>
 
-                <!-- 7. AKTIVASI LAYANAN PEMBAYARAN -->
+                <!-- 7. AKTIVASI LAYANAN PEMBAYARAN (QRIS) -->
                 <section id="tab-briva" class="admin-tab hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border border-t-4 border-t-orange-500 p-6 max-w-xl space-y-6">
                         <div>
@@ -480,17 +480,10 @@
                         <div class="space-y-3">
                             <div class="flex items-center justify-between p-3.5 border rounded-2xl bg-gray-50">
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold"><i class="fa-solid fa-building-columns"></i></div>
-                                    <div><h4 class="font-bold text-xs text-gray-800">BRI Virtual Account (BRIVA)</h4><p class="text-[10px] text-gray-500">Transfer bank BRI</p></div>
+                                    <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold"><i class="fa-solid fa-qrcode"></i></div>
+                                    <div><h4 class="font-bold text-xs text-gray-800">QRIS (Scan & Bayar Bebas Admin)</h4><p class="text-[10px] text-gray-500">Scan via semua m-banking & e-wallet</p></div>
                                 </div>
-                                <input type="checkbox" id="pay-opt-briva" checked onchange="savePaymentActivation()" class="w-5 h-5 accent-indigo-600">
-                            </div>
-                            <div class="flex items-center justify-between p-3.5 border rounded-2xl bg-gray-50">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-9 h-9 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center font-bold"><i class="fa-solid fa-wallet"></i></div>
-                                    <div><h4 class="font-bold text-xs text-gray-800">E-Wallet DANA</h4><p class="text-[10px] text-gray-500">Dompet digital DANA</p></div>
-                                </div>
-                                <input type="checkbox" id="pay-opt-dana" checked onchange="savePaymentActivation()" class="w-5 h-5 accent-indigo-600">
+                                <input type="checkbox" id="pay-opt-qris" checked onchange="savePaymentActivation()" class="w-5 h-5 accent-indigo-600">
                             </div>
                             <div class="flex items-center justify-between p-3.5 border rounded-2xl bg-gray-50">
                                 <div class="flex items-center space-x-3">
@@ -510,16 +503,16 @@
                     </div>
                 </section>
 
-                <!-- 8. REKENING TUJUAN TOKO -->
+                <!-- 8. REKENING & QRIS TOKO -->
                 <section id="tab-store-accounts" class="admin-tab hidden space-y-6">
                     <div class="flex justify-between items-center">
-                        <h3 class="font-bold text-gray-800 text-lg">Rekening & E-Wallet Tujuan Toko</h3>
-                        <button onclick="openStoreAccountModal()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-bold"><i class="fa-solid fa-plus mr-1"></i> Tambah Rekening</button>
+                        <h3 class="font-bold text-gray-800 text-lg">Gambar QRIS & Rekening Toko</h3>
+                        <button onclick="openStoreAccountModal()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-bold"><i class="fa-solid fa-plus mr-1"></i> Tambah QRIS / Rekening</button>
                     </div>
                     <div class="bg-white rounded-2xl shadow-sm border p-6">
                         <table class="w-full text-left text-sm">
                             <thead class="bg-indigo-50 text-indigo-700 uppercase text-xs font-bold">
-                                <tr><th class="p-3">Bank</th><th class="p-3">Nomor Rekening</th><th class="p-3">Atas Nama</th></tr>
+                                <tr><th class="p-3">Jenis / Bank</th><th class="p-3">Detail / URL QRIS</th><th class="p-3">Atas Nama</th></tr>
                             </thead>
                             <tbody id="store-accounts-table" class="divide-y"></tbody>
                         </table>
@@ -601,14 +594,14 @@
         </div>
     </div>
 
-    <!-- MODAL REKENING TOKO -->
+    <!-- MODAL REKENING / QRIS TOKO -->
     <div id="store-account-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-4">
-            <h3 class="font-bold text-gray-900">Tambah Rekening Toko</h3>
+            <h3 class="font-bold text-gray-900">Tambah QRIS / Rekening Toko</h3>
             <form onsubmit="saveStoreAccount(event)" class="space-y-3">
-                <input type="text" id="sa-bank" placeholder="Nama Bank / E-Wallet" required class="w-full border rounded-xl p-3 text-sm outline-none bg-white">
-                <input type="text" id="sa-number" placeholder="Nomor Rekening" required class="w-full border rounded-xl p-3 text-sm outline-none bg-white">
-                <input type="text" id="sa-holder" placeholder="Atas Nama" required class="w-full border rounded-xl p-3 text-sm outline-none bg-white">
+                <input type="text" id="sa-bank" placeholder="Nama Bank / QRIS Utama" required class="w-full border rounded-xl p-3 text-sm outline-none bg-white">
+                <input type="text" id="sa-number" placeholder="Nomor Rekening / URL Gambar QRIS" required class="w-full border rounded-xl p-3 text-sm outline-none bg-white">
+                <input type="text" id="sa-holder" placeholder="Atas Nama / Keterangan Toko" required class="w-full border rounded-xl p-3 text-sm outline-none bg-white">
                 <button type="submit" class="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl text-xs shadow">Simpan</button>
             </form>
             <button onclick="closeStoreAccountModal()" class="w-full py-2 bg-gray-100 text-gray-600 rounded-xl text-xs font-bold">Batal</button>
@@ -623,7 +616,7 @@
         let storeAccounts = [];
         let pendingBuyers = [];
         let selectedProductForCheckout = null;
-        let paymentMethodsConfig = { briva: true, dana: true, cash: true, bond: true };
+        let paymentMethodsConfig = { qris: true, cash: true, bond: true };
         let generatedOTP = '';
         let tempRegData = null;
         let currentCategoryFilter = 'semua';
@@ -799,10 +792,12 @@
                 const data = snapshot.val();
                 if (data) {
                     paymentMethodsConfig = data;
-                    document.getElementById('pay-opt-briva').checked = !!data.briva;
-                    document.getElementById('pay-opt-dana').checked = !!data.dana;
-                    document.getElementById('pay-opt-cash').checked = !!data.cash;
-                    document.getElementById('pay-opt-bond').checked = !!data.bond;
+                    const qrisEl = document.getElementById('pay-opt-qris');
+                    if(qrisEl) qrisEl.checked = !!data.qris;
+                    const cashEl = document.getElementById('pay-opt-cash');
+                    if(cashEl) cashEl.checked = !!data.cash;
+                    const bondEl = document.getElementById('pay-opt-bond');
+                    if(bondEl) bondEl.checked = !!data.bond;
                 }
             });
         }
@@ -813,13 +808,12 @@
                 return;
             }
             const config = {
-                briva: document.getElementById('pay-opt-briva').checked,
-                dana: document.getElementById('pay-opt-dana').checked,
+                qris: document.getElementById('pay-opt-qris').checked,
                 cash: document.getElementById('pay-opt-cash').checked,
                 bond: document.getElementById('pay-opt-bond').checked
             };
             window.set(window.ref(window.db, 'settings/payment_methods'), config).then(() => {
-                alert("Aktivasi layanan pembayaran berhasil disimpan!");
+                alert("Aktivasi metode pembayaran QRIS berhasil disimpan!");
             });
         }
 
@@ -932,8 +926,7 @@
             
             const selectEl = document.getElementById('modal-pay-method');
             let opts = '';
-            if (paymentMethodsConfig.briva) opts += `<option value="BRI VA">BRI Virtual Account (BRIVA)</option>`;
-            if (paymentMethodsConfig.dana) opts += `<option value="DANA">E-Wallet DANA</option>`;
+            if (paymentMethodsConfig.qris) opts += `<option value="QRIS">QRIS (Scan & Bayar Bebas Admin)</option>`;
             if (paymentMethodsConfig.cash) opts += `<option value="Cash">Cash (Bayar di Tempat)</option>`;
             if (paymentMethodsConfig.bond) opts += `<option value="Kasbon">Bond / Kasbon (Tempo SPV)</option>`;
             
@@ -959,20 +952,12 @@
             }
             const newOrdId = `ORD-${Math.floor(1000 + Math.random() * 9000)}`;
             
-            let vaInfo = '';
-            if (payMethod.includes('VA') || payMethod === 'DANA') {
-                // Generate nomor VA panjang (14 digit) agar aman di m-banking tanpa terdeteksi kode pendek/BPJS
-                const randomNum = Math.floor(10000000000 + Math.random() * 90000000000);
-                vaInfo = '7070708080' + String(randomNum).substring(0, 9);
-            }
-
             const orderData = {
                 id: newOrdId,
                 customer: currentUser.name,
                 phone: currentUser.phone || '0812345',
                 total: selectedProductForCheckout.price,
                 payment: payMethod,
-                vaNumber: vaInfo,
                 status: payMethod === 'Kasbon' ? 'Pending Nego Kasbon' : 'Pending',
                 delivery: 'Menunggu Diproses',
                 time: new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})
@@ -1028,12 +1013,32 @@
             list.innerHTML = html || '<p class="text-center text-gray-400 text-xs py-8">Belum ada nota pesanan.</p>';
         }
 
-        // STATUS PEMBELI DENGAN KOTAK INFORMASI VA & TOMBOL SALIN
+        // STATUS PEMBELI DENGAN TAMPILAN GAMBAR QRIS RESMI
         function renderBuyerStatus() {
             const list = document.getElementById('buyer-status-list');
             const myOrders = globalOrders.filter(o => o.customer === currentUser.name);
             let html = '';
             myOrders.forEach(o => {
+                let qrisDisplay = '';
+                if (o.payment === 'QRIS') {
+                    // Mengambil gambar QRIS dari storeAccounts jika ada, atau menampilkan QRIS default toko
+                    let qrisImgUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=MAZTRI-OLENSHOP-QRIS-" + o.id;
+                    storeAccounts.forEach(sa => {
+                        if (sa.number && sa.number.startsWith('http')) qrisImgUrl = sa.number;
+                    });
+
+                    qrisDisplay = `
+                        <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-100 text-center space-y-2">
+                            <span class="text-[11px] font-bold text-indigo-900 block">Scan QRIS (Bebas Admin):</span>
+                            <div class="bg-white p-3 rounded-xl inline-block border shadow-inner">
+                                <img src="${qrisImgUrl}" class="w-36 h-36 mx-auto object-contain rounded-lg">
+                            </div>
+                            <p class="text-[10px] text-gray-600">Total Tagihan: <b class="text-indigo-600">Rp ${Number(o.total).toLocaleString('id-ID')}</b></p>
+                            <p class="text-[9px] text-gray-400">Scan pakai BCA, BRImo, DANA, OVO, ShopeePay, dll.</p>
+                        </div>
+                    `;
+                }
+
                 html += `
                     <div class="bg-white p-4 rounded-2xl border shadow-sm space-y-3">
                         <div class="flex justify-between items-center">
@@ -1042,23 +1047,9 @@
                         </div>
                         <div class="text-xs space-y-1">
                             <p class="text-gray-600">Metode: <span class="font-bold text-gray-800">${o.payment}</span></p>
-                            <p class="text-gray-600">Total Tagihan: <span class="font-bold text-indigo-600">Rp ${Number(o.total).toLocaleString('id-ID')}</span></p>
                         </div>
                         
-                        ${o.vaNumber ? `
-                            <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-100 space-y-2">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-[11px] font-bold text-indigo-900">Nomor Virtual Account / Tujuan:</span>
-                                    <button onclick="navigator.clipboard.writeText('${o.vaNumber}'); alert('Nomor VA berhasil disalin!');" class="text-[10px] bg-indigo-600 text-white px-2 py-1 rounded-lg font-bold hover:bg-indigo-700">
-                                        <i class="fa-solid fa-copy mr-1"></i> Salin
-                                    </button>
-                                </div>
-                                <div class="bg-white p-2 rounded-lg border text-center font-mono font-extrabold text-sm text-indigo-900 tracking-wider">
-                                    ${o.vaNumber}
-                                </div>
-                                <p class="text-[10px] text-gray-500 text-center">Silakan lakukan transfer melalui m-banking sesuai nominal tagihan di atas.</p>
-                            </div>
-                        ` : ''}
+                        ${qrisDisplay}
 
                         <div class="bg-gray-50 p-2.5 rounded-xl border text-[11px]">
                             <p class="font-bold text-emerald-600"><i class="fa-solid fa-truck-fast mr-1"></i> Status Pengiriman: ${o.delivery || 'Diproses'}</p>
@@ -1090,14 +1081,14 @@
 
         function renderAdminAll() {
             let revenue = 0; let pendingKasbon = 0;
-            let cashTotal = 0; let nonCashTotal = 0;
-            let ordHtml = ''; let cashHtml = ''; let kasbonHtml = ''; let devHtml = '';
+            let cashTotal = 0; let qrisTotal = 0;
+            let ordHtml = ''; let cashHtml = ''; let kasbonHtml = ''; let devHtml = ''; let nonCashHtml = '';
             
             globalOrders.forEach(o => {
                 if (o.status === 'Lunas') {
                     revenue += o.total;
                     if (o.payment === 'Cash') cashTotal += o.total;
-                    else nonCashTotal += o.total;
+                    else qrisTotal += o.total;
                 }
                 if (o.payment === 'Kasbon' && o.status !== 'Lunas') pendingKasbon++;
 
@@ -1105,7 +1096,10 @@
                 
                 if (o.payment === 'Cash') {
                     cashHtml += `<tr class="border-b"><td class="p-3">${o.id}</td><td class="p-3">${o.customer}</td><td class="p-3">Rp ${o.total.toLocaleString('id-ID')}</td><td class="p-3">${o.status}</td><td class="p-3 text-right"><button onclick="verifyCash('${o.id}')" class="bg-emerald-600 text-white px-3 py-1 rounded text-xs font-bold">Terima Uang (Admin)</button></td></tr>`;
+                } else if (o.payment === 'QRIS') {
+                    nonCashHtml += `<tr class="border-b"><td class="p-3">${o.id}</td><td class="p-3">${o.customer}</td><td class="p-3">Rp ${o.total.toLocaleString('id-ID')}</td><td class="p-3">${o.payment}</td><td class="p-3 text-right"><button onclick="verifyCash('${o.id}')" class="bg-blue-600 text-white px-3 py-1 rounded text-xs font-bold">Verifikasi Mutasi QRIS</button></td></tr>`;
                 }
+
                 if (o.payment === 'Kasbon') {
                     kasbonHtml += `<tr class="border-b"><td class="p-3">${o.id}</td><td class="p-3">${o.customer}</td><td class="p-3">Rp ${o.total.toLocaleString('id-ID')}</td><td class="p-3">${o.status}</td><td class="p-3 text-right"><button onclick="verifyCash('${o.id}')" class="bg-amber-600 text-white px-2 py-1 rounded text-xs font-bold">Approval SPV</button></td></tr>`;
                 }
@@ -1113,7 +1107,8 @@
             });
 
             document.getElementById('orders-table').innerHTML = ordHtml || '<tr><td colspan="5" class="text-center py-4 text-gray-400">Belum ada pesanan.</td></tr>';
-            document.getElementById('cash-table').innerHTML = cashHtml || '<tr><td colspan="5" class="text-center py-4 text-gray-400">Tidak ada kas.</td></tr>';
+            document.getElementById('cash-table').innerHTML = cashHtml || '<tr><td colspan="5" class="text-center py-4 text-gray-400">Tidak ada kas tunai.</td></tr>';
+            document.getElementById('noncash-table').innerHTML = nonCashHtml || '<tr><td colspan="5" class="text-center py-4 text-gray-400">Tidak ada mutasi QRIS.</td></tr>';
             document.getElementById('kasbon-table').innerHTML = kasbonHtml || '<tr><td colspan="6" class="text-center py-4 text-gray-400">Tidak ada kasbon.</td></tr>';
             document.getElementById('delivery-table').innerHTML = devHtml || '<tr><td colspan="4" class="text-center py-4 text-gray-400">Tidak ada pengiriman.</td></tr>';
             
@@ -1123,12 +1118,12 @@
             document.getElementById('spv-cash-pending').innerText = pendingKasbon;
 
             document.getElementById('close-branch-cash').innerText = `Rp ${cashTotal.toLocaleString('id-ID')}`;
-            document.getElementById('close-branch-noncash').innerText = `Rp ${nonCashTotal.toLocaleString('id-ID')}`;
+            document.getElementById('close-branch-noncash').innerText = `Rp ${qrisTotal.toLocaleString('id-ID')}`;
         }
 
         function verifyCash(id) {
             window.update(window.ref(window.db, 'orders/' + id), { status: 'Lunas' })
-                .then(() => alert("Status transaksi berhasil diperbarui!"));
+                .then(() => alert("Status transaksi berhasil diperbarui menjadi Lunas!"));
         }
 
         function updateDelivery(id, status) {
@@ -1215,7 +1210,7 @@
             };
             window.set(window.ref(window.db, 'store_accounts/' + id), acc).then(() => { 
                 closeStoreAccountModal(); 
-                alert("Rekening berhasil disimpan!"); 
+                alert("QRIS / Rekening Toko berhasil disimpan!"); 
             });
         }
 
@@ -1224,9 +1219,9 @@
             if (!tbody) return;
             let html = '';
             storeAccounts.forEach(sa => {
-                html += `<tr class="border-b"><td class="p-3 font-bold">${sa.bank}</td><td class="p-3 font-mono">${sa.number}</td><td class="p-3">${sa.holder}</td></tr>`;
+                html += `<tr class="border-b"><td class="p-3 font-bold">${sa.bank}</td><td class="p-3 font-mono text-xs truncate max-w-xs">${sa.number}</td><td class="p-3">${sa.holder}</td></tr>`;
             });
-            tbody.innerHTML = html || '<tr><td colspan="3" class="text-center py-4 text-gray-400">Belum ada rekening.</td></tr>';
+            tbody.innerHTML = html || '<tr><td colspan="3" class="text-center py-4 text-gray-400">Belum ada QRIS / Rekening terdaftar.</td></tr>';
         }
     </script>
 </body>
