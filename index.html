@@ -503,7 +503,7 @@
                     </div>
                 </section>
 
-                <!-- 8. REKENING & QRIS TOKO -->
+                <!-- 8. REKENING & QRIS TOKO (DENGAN TOMBOL HAPUS) -->
                 <section id="tab-store-accounts" class="admin-tab hidden space-y-6">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-gray-800 text-lg">Gambar QRIS & Rekening Toko</h3>
@@ -512,7 +512,7 @@
                     <div class="bg-white rounded-2xl shadow-sm border p-6">
                         <table class="w-full text-left text-sm">
                             <thead class="bg-indigo-50 text-indigo-700 uppercase text-xs font-bold">
-                                <tr><th class="p-3">Jenis / Bank</th><th class="p-3">Detail / URL QRIS</th><th class="p-3">Atas Nama</th></tr>
+                                <tr><th class="p-3">Jenis / Bank</th><th class="p-3">Detail / URL QRIS</th><th class="p-3">Atas Nama</th><th class="p-3 text-right">Aksi</th></tr>
                             </thead>
                             <tbody id="store-accounts-table" class="divide-y"></tbody>
                         </table>
@@ -1013,7 +1013,7 @@
             list.innerHTML = html || '<p class="text-center text-gray-400 text-xs py-8">Belum ada nota pesanan.</p>';
         }
 
-        // STATUS PEMBELI DENGAN TAMPILAN GAMBAR QRIS RESMI
+        // STATUS PEMBELI DENGAN TAMPILAN QRIS GENERATOR STABIL
         function renderBuyerStatus() {
             const list = document.getElementById('buyer-status-list');
             const myOrders = globalOrders.filter(o => o.customer === currentUser.name);
@@ -1021,11 +1021,8 @@
             myOrders.forEach(o => {
                 let qrisDisplay = '';
                 if (o.payment === 'QRIS') {
-                    // Mengambil gambar QRIS dari storeAccounts jika ada, atau menampilkan QRIS default toko
-                    let qrisImgUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=MAZTRI-OLENSHOP-QRIS-" + o.id;
-                    storeAccounts.forEach(sa => {
-                        if (sa.number && sa.number.startsWith('http')) qrisImgUrl = sa.number;
-                    });
+                    const qrisText = `MAZTRI-OLENSHOP-ID:${o.id}-TOTAL:${o.total}`;
+                    const qrisImgUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=` + encodeURIComponent(qrisText);
 
                     qrisDisplay = `
                         <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-100 text-center space-y-2">
@@ -1214,14 +1211,38 @@
             });
         }
 
+        // FUNGSI HAPUS REKENING ATAU QRIS TOKO
+        function deleteStoreAccount(id) {
+            if (currentUser && currentUser.role !== 'supervisor') {
+                alert("Hanya Supervisor yang dapat menghapus rekening / QRIS toko!");
+                return;
+            }
+            if (confirm("Apakah Anda yakin ingin menghapus rekening atau QRIS ini?")) {
+                window.remove(window.ref(window.db, 'store_accounts/' + id)).then(() => {
+                    alert("Rekening / QRIS berhasil dihapus!");
+                });
+            }
+        }
+
         function renderStoreAccounts() {
             const tbody = document.getElementById('store-accounts-table');
             if (!tbody) return;
             let html = '';
             storeAccounts.forEach(sa => {
-                html += `<tr class="border-b"><td class="p-3 font-bold">${sa.bank}</td><td class="p-3 font-mono text-xs truncate max-w-xs">${sa.number}</td><td class="p-3">${sa.holder}</td></tr>`;
+                html += `
+                    <tr class="border-b">
+                        <td class="p-3 font-bold">${sa.bank}</td>
+                        <td class="p-3 font-mono text-xs truncate max-w-xs">${sa.number}</td>
+                        <td class="p-3">${sa.holder}</td>
+                        <td class="p-3 text-right">
+                            <button onclick="deleteStoreAccount('${sa.id}')" class="bg-rose-50 hover:bg-rose-600 hover:text-white text-rose-600 px-3 py-1 rounded-lg text-xs font-bold transition">
+                                <i class="fa-solid fa-trash mr-1"></i> Hapus
+                            </button>
+                        </td>
+                    </tr>
+                `;
             });
-            tbody.innerHTML = html || '<tr><td colspan="3" class="text-center py-4 text-gray-400">Belum ada QRIS / Rekening terdaftar.</td></tr>';
+            tbody.innerHTML = html || '<tr><td colspan="4" class="text-center py-4 text-gray-400">Belum ada QRIS / Rekening terdaftar.</td></tr>';
         }
     </script>
 </body>
