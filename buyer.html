@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maztri Olenshop - Aplikasi Konsumen</title>
+    <title>Maztri Olenshop - Belanja Aman & Terpercaya</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -27,25 +27,25 @@
     <div class="app-container w-full bg-white flex flex-col overflow-hidden relative">
 
         <!-- HEADER APLIKASI -->
-        <header class="bg-indigo-600 text-white px-6 py-4 flex justify-between items-center shrink-0 shadow-md z-10">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-store"></i></div>
-                <div><h1 class="font-bold text-base leading-tight">Maztri Olenshop</h1><p class="text-[10px] text-indigo-200">Belanja & Reversal Aman</p></div>
+        <header class="bg-indigo-600 text-white px-5 py-3.5 flex justify-between items-center shrink-0 shadow-md z-10">
+            <div class="flex items-center space-x-2.5">
+                <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center font-bold text-base"><i class="fa-solid fa-store"></i></div>
+                <div><h1 class="font-bold text-sm leading-tight">Maztri Olenshop</h1><p class="text-[9px] text-indigo-200">Mall Belanja Online</p></div>
             </div>
-            <div id="header-user-badge" class="hidden text-xs bg-white/20 px-3 py-1 rounded-full font-semibold truncate max-w-[120px]"></div>
+            <div id="header-user-badge" class="hidden text-[11px] bg-white/20 px-3 py-1 rounded-full font-semibold truncate max-w-[110px]"></div>
         </header>
 
         <!-- KONTEN UTAMA APLIKASI -->
         <main class="flex-1 overflow-y-auto bg-gray-50 relative scrollbar-hide pb-20">
 
-            <!-- 1. HALAMAN LOGIN UTAMA -->
+            <!-- 1. HALAMAN LOGIN -->
             <section id="screen-login" class="p-6 space-y-5 hidden">
                 <div class="text-center pt-8 pb-4">
                     <div class="w-20 h-20 bg-indigo-50 text-indigo-600 rounded-full mx-auto flex items-center justify-center text-4xl mb-4 shadow-sm border border-indigo-100">
-                        <i class="fa-solid fa-user-shield"></i>
+                        <i class="fa-solid fa-lock"></i>
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-900">Selamat Datang</h2>
-                    <p class="text-xs text-gray-500 mt-1">Masuk dengan nomor HP terdaftar Anda untuk melanjutkan belanja.</p>
+                    <h2 class="text-2xl font-bold text-gray-900">Masuk Akun</h2>
+                    <p class="text-xs text-gray-500 mt-1">Masukkan Nomor HP dan Password rahasia Anda.</p>
                 </div>
 
                 <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
@@ -53,56 +53,67 @@
                         <label class="block text-[10px] font-bold text-gray-700 uppercase mb-1">Nomor HP / WhatsApp</label>
                         <div class="relative">
                             <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400"><i class="fa-solid fa-phone"></i></span>
-                            <input type="text" id="login-phone" placeholder="081234567890" required class="w-full pl-10 pr-4 py-3.5 border rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500 bg-white font-semibold">
+                            <input type="text" id="login-phone" placeholder="081234567890" required class="w-full pl-10 pr-4 py-3 border rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500 bg-white font-semibold">
                         </div>
                     </div>
-                    <button type="submit" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg transition text-sm">Masuk (Kirim OTP)</button>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-700 uppercase mb-1">Password</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400"><i class="fa-solid fa-key"></i></span>
+                            <input type="password" id="login-password" placeholder="••••••••" required class="w-full pl-10 pr-4 py-3 border rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500 bg-white font-semibold">
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg transition text-sm">Masuk ke Aplikasi</button>
                 </form>
 
                 <div class="text-center pt-6 border-t border-gray-200 mt-6">
-                    <p class="text-xs text-gray-500 mb-2">Konsumen baru di Maztri Olenshop?</p>
+                    <p class="text-xs text-gray-500 mb-2">Belum punya akun?</p>
                     <button onclick="gotoRegister()" class="w-full py-3 bg-white border border-indigo-200 text-indigo-600 font-bold rounded-xl shadow-sm transition text-sm hover:bg-indigo-50">Daftar Akun Baru</button>
                 </div>
             </section>
 
-            <!-- 2. HALAMAN PENDAFTARAN AKUN -->
+            <!-- 2. HALAMAN PENDAFTARAN -->
             <section id="screen-register" class="p-6 space-y-5 hidden">
                 <div class="text-center pt-2">
                     <h2 class="text-xl font-bold text-gray-900">Daftar Akun Baru</h2>
-                    <p class="text-xs text-gray-500 mt-1">Lengkapi data untuk transaksi aman dan jaminan reversal saldo.</p>
+                    <p class="text-xs text-gray-500 mt-1">Lengkapi data diri, buat password, dan verifikasi wajah.</p>
                 </div>
 
                 <form onsubmit="handleRegisterSubmit(event)" class="space-y-4">
                     <div>
                         <label class="block text-[10px] font-bold text-gray-700 uppercase mb-1">Nama Lengkap</label>
-                        <input type="text" id="reg-name" placeholder="Sesuai KTP/Identitas" required class="w-full border rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                        <input type="text" id="reg-name" placeholder="Nama Lengkap" required class="w-full border rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-gray-700 uppercase mb-1">Nomor HP / WhatsApp</label>
                         <input type="text" id="reg-phone" placeholder="081234567890" required class="w-full border rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-gray-700 uppercase mb-1">Alamat Pengiriman Lengkap</label>
-                        <textarea id="reg-address" rows="2" placeholder="Detail alamat pengiriman..." required class="w-full border rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-indigo-500 bg-white"></textarea>
+                        <label class="block text-[10px] font-bold text-gray-700 uppercase mb-1">Buat Password</label>
+                        <input type="password" id="reg-password" placeholder="Minimal 6 karakter" required class="w-full border rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-700 uppercase mb-1">Alamat Pengiriman</label>
+                        <textarea id="reg-address" rows="2" placeholder="Alamat lengkap..." required class="w-full border rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-indigo-500 bg-white"></textarea>
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-gray-700 uppercase mb-1">Email <span class="text-gray-400 font-normal">(Opsional)</span></label>
                         <input type="email" id="reg-email" placeholder="email@contoh.com" class="w-full border rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
                     </div>
 
-                    <!-- FOTO SELFIE / FACEAPP -->
+                    <!-- FOTO SELFIE -->
                     <div class="bg-indigo-50 p-4 rounded-2xl border border-indigo-100 text-center space-y-3">
                         <div class="w-16 h-16 bg-white rounded-full mx-auto flex items-center justify-center text-indigo-600 text-2xl shadow-sm overflow-hidden border" id="selfie-preview-box">
                             <i class="fa-solid fa-camera"></i>
                         </div>
                         <div>
                             <p class="text-xs font-bold text-indigo-900">Verifikasi Wajah (Selfie FaceApp)</p>
-                            <p class="text-[10px] text-indigo-600 mt-0.5">Unggah foto wajah untuk keamanan identitas.</p>
+                            <p class="text-[10px] text-indigo-600 mt-0.5">Unggah foto wajah untuk keamanan akun.</p>
                         </div>
                         <input type="file" id="reg-selfie" accept="image/*" required onchange="previewSelfie(event)" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer">
                     </div>
 
-                    <button type="submit" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg transition text-sm">Daftar & Kirim OTP</button>
+                    <button type="submit" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg transition text-sm">Daftar Akun Sekarang</button>
                 </form>
 
                 <div class="text-center pt-2 border-t mt-4">
@@ -110,74 +121,116 @@
                 </div>
             </section>
 
-            <!-- 3. HALAMAN VERIFIKASI OTP -->
-            <section id="screen-otp" class="p-6 space-y-6 hidden text-center pt-12">
-                <div class="w-20 h-20 bg-indigo-50 text-indigo-600 rounded-3xl mx-auto flex items-center justify-center text-3xl font-bold shadow-sm">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-                <div>
-                    <h2 class="text-xl font-bold text-gray-900">Verifikasi Nomor HP</h2>
-                    <p class="text-xs text-gray-500 mt-1">Masukkan 4 digit kode OTP yang dikirim via WhatsApp ke nomor <span id="otp-phone-label" class="font-bold text-gray-800"></span></p>
-                </div>
-
-                <div class="flex justify-center space-x-3 my-6">
-                    <input type="text" maxlength="1" class="otp-input w-14 h-14 text-center text-2xl font-bold border rounded-2xl outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200" oninput="moveToNext(this, 1)">
-                    <input type="text" maxlength="1" class="otp-input w-14 h-14 text-center text-2xl font-bold border rounded-2xl outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200" oninput="moveToNext(this, 2)">
-                    <input type="text" maxlength="1" class="otp-input w-14 h-14 text-center text-2xl font-bold border rounded-2xl outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200" oninput="moveToNext(this, 3)">
-                    <input type="text" maxlength="1" class="otp-input w-14 h-14 text-center text-2xl font-bold border rounded-2xl outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200" oninput="moveToNext(this, 4)">
-                </div>
-
-                <button onclick="verifyOtpCode()" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg transition text-sm">Konfirmasi & Masuk Aplikasi</button>
-                <button onclick="gotoLogin()" class="text-xs text-gray-400 hover:text-gray-600 font-semibold mt-2">← Batal / Ubah Nomor</button>
-            </section>
-
-            <!-- 4. KATALOG PRODUK & BANNER IKLAN RANDOM -->
+            <!-- 3. KATALOG PRODUK UTAMA (TAMPILAN E-COMMERCE) -->
             <section id="screen-catalog" class="p-4 space-y-4 hidden">
-                
-                <!-- BANNER / RANDOM IKLAN DARI SUPERVISOR -->
-                <div id="promo-banner" class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-4 text-white shadow-md relative overflow-hidden flex items-center justify-between">
+                <!-- BANNER IKLAN PROMO -->
+                <div id="promo-banner" class="bg-gradient-to-r from-indigo-600 to-violet-600 rounded-2xl p-4 text-white shadow-md relative overflow-hidden flex items-center justify-between">
                     <div class="z-10 space-y-1">
-                        <span class="bg-white/20 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Flash Promo Store</span>
-                        <h3 id="banner-title" class="font-bold text-base leading-snug">Diskon Spesial Hari Ini!</h3>
-                        <p id="banner-desc" class="text-xs text-indigo-100">Temukan berbagai produk pilihan berkualitas langsung dari toko.</p>
+                        <span class="bg-white/20 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Flash Sale Store</span>
+                        <h3 id="banner-title" class="font-bold text-sm leading-snug">Diskon Spesial Hari Ini!</h3>
+                        <p id="banner-desc" class="text-[11px] text-indigo-100">Temukan barang berkualitas pilihan.</p>
                     </div>
-                    <div id="banner-img-box" class="w-20 h-20 rounded-xl bg-white/20 overflow-hidden shrink-0 ml-3 flex items-center justify-center">
+                    <div id="banner-img-box" class="w-20 h-20 rounded-xl bg-white/20 overflow-hidden shrink-0 ml-3 flex items-center justify-center border border-white/30">
                         <i class="fa-solid fa-tags text-2xl text-white/70"></i>
                     </div>
                 </div>
 
-                <!-- MENU PILIHAN KEBUTUHAN BELANJA (KATEGORI) -->
+                <!-- KATEGORI PILIHAN -->
                 <div>
-                    <h3 class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-2">Kategori Kebutuhan</h3>
+                    <h3 class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-2">Kategori Belanja</h3>
                     <div class="grid grid-cols-5 gap-2 text-center">
-                        <button onclick="filterCategory('Semua')" id="cat-Semua" class="cat-btn bg-indigo-600 text-white p-2.5 rounded-xl text-[10px] font-bold shadow-sm transition">Semua</button>
-                        <button onclick="filterCategory('Makanan')" id="cat-Makanan" class="cat-btn bg-white text-gray-700 border p-2.5 rounded-xl text-[10px] font-bold shadow-sm transition">Makanan</button>
-                        <button onclick="filterCategory('Pakaian')" id="cat-Pakaian" class="cat-btn bg-white text-gray-700 border p-2.5 rounded-xl text-[10px] font-bold shadow-sm transition">Pakaian</button>
-                        <button onclick="filterCategory('Elektronik')" id="cat-Elektronik" class="cat-btn bg-white text-gray-700 border p-2.5 rounded-xl text-[10px] font-bold shadow-sm transition">Elektronik</button>
-                        <button onclick="filterCategory('Kebutuhan Pokok')" id="cat-Pokok" class="cat-btn bg-white text-gray-700 border p-2.5 rounded-xl text-[10px] font-bold shadow-sm transition">Pokok</button>
+                        <button onclick="filterCategory('Semua')" id="cat-Semua" class="cat-btn bg-indigo-600 text-white p-2 rounded-xl text-[10px] font-bold shadow-sm transition">Semua</button>
+                        <button onclick="filterCategory('Makanan')" id="cat-Makanan" class="cat-btn bg-white text-gray-700 border p-2 rounded-xl text-[10px] font-bold shadow-sm transition">Makanan</button>
+                        <button onclick="filterCategory('Pakaian')" id="cat-Pakaian" class="cat-btn bg-white text-gray-700 border p-2 rounded-xl text-[10px] font-bold shadow-sm transition">Pakaian</button>
+                        <button onclick="filterCategory('Elektronik')" id="cat-Elektronik" class="cat-btn bg-white text-gray-700 border p-2 rounded-xl text-[10px] font-bold shadow-sm transition">Elektronik</button>
+                        <button onclick="filterCategory('Kebutuhan Pokok')" id="cat-Pokok" class="cat-btn bg-white text-gray-700 border p-2 rounded-xl text-[10px] font-bold shadow-sm transition">Pokok</button>
                     </div>
                 </div>
 
-                <div class="flex justify-between items-center pt-2">
-                    <h3 id="catalog-heading" class="font-bold text-gray-800 text-sm">Semua Produk Pilihan</h3>
+                <div class="flex justify-between items-center pt-1">
+                    <h3 class="font-bold text-gray-800 text-xs uppercase tracking-wider">Rekomendasi Produk (15 Pilihan)</h3>
                 </div>
                 
-                <!-- GRID PRODUK -->
+                <!-- GRID PRODUK ALA E-COMMERCE -->
                 <div id="buyer-product-grid" class="grid grid-cols-2 gap-3 pb-10"></div>
             </section>
 
-            <!-- 5. PESANAN SAYA & STATUS REVERSAL -->
-            <section id="screen-orders" class="p-4 space-y-4 hidden">
+            <!-- 4. HALAMAN DETAIL PRODUK (DESKRIPSI & SPESIFIKASI) -->
+            <section id="screen-product-detail" class="p-4 space-y-4 hidden pb-20">
+                <button onclick="switchBuyerTab('catalog')" class="text-xs font-bold text-indigo-600 flex items-center space-x-1.5 bg-indigo-50 px-3 py-1.5 rounded-xl w-fit">
+                    <i class="fa-solid fa-arrow-left"></i> <span>Kembali ke Katalog</span>
+                </button>
+
+                <div class="bg-white rounded-3xl border overflow-hidden shadow-sm space-y-4">
+                    <div class="h-60 w-full bg-gray-100 overflow-hidden relative">
+                        <img id="detail-img" src="" class="w-full h-full object-cover">
+                        <span id="detail-category" class="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold">Kategori</span>
+                    </div>
+
+                    <div class="px-5 pb-5 space-y-4">
+                        <div>
+                            <h2 id="detail-name" class="font-bold text-gray-900 text-base leading-snug">Nama Produk</h2>
+                            <p id="detail-price" class="text-indigo-600 font-extrabold text-xl mt-1">Rp 0</p>
+                        </div>
+
+                        <!-- Deskripsi Produk -->
+                        <div class="border-t pt-3 space-y-1.5">
+                            <h4 class="font-bold text-xs text-gray-800 uppercase tracking-wide flex items-center">
+                                <i class="fa-solid fa-circle-info text-indigo-600 mr-1.5"></i> Deskripsi Produk
+                            </h4>
+                            <p id="detail-desc" class="text-xs text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-2xl border">Belum ada deskripsi.</p>
+                        </div>
+
+                        <!-- Spesifikasi Produk -->
+                        <div class="border-t pt-3 space-y-1.5">
+                            <h4 class="font-bold text-xs text-gray-800 uppercase tracking-wide flex items-center">
+                                <i class="fa-solid fa-list-check text-indigo-600 mr-1.5"></i> Spesifikasi
+                            </h4>
+                            <p id="detail-spec" class="text-xs text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-2xl border">Standar pabrik berkualitas tinggi.</p>
+                        </div>
+
+                        <button id="detail-buy-btn" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg transition text-xs flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span>Beli & Pilih Pembayaran</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. RIWAYAT NOTA PESANAN -->
+            <section id="screen-orders" class="p-4 space-y-4 hidden pb-16">
                 <div class="flex justify-between items-center">
-                    <h3 class="font-bold text-gray-800 text-base">Pesanan & Status Reversal</h3>
+                    <h3 class="font-bold text-gray-800 text-base">Riwayat Nota Pesanan</h3>
                 </div>
                 <div id="buyer-orders-list" class="space-y-3"></div>
             </section>
 
-            <!-- 6. PROFIL & REKENING REVERSAL SAYA -->
-            <section id="screen-profile" class="p-4 space-y-4 hidden">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border space-y-4 text-center">
-                    <div id="profile-avatar" class="w-20 h-20 bg-indigo-100 rounded-full mx-auto flex items-center justify-center overflow-hidden border-2 border-indigo-500"></div>
+            <!-- 6. STATUS PESANAN & MONITORING LOGISTIK -->
+            <section id="screen-status" class="p-4 space-y-4 hidden pb-16">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold text-gray-800 text-base">Status Pesanan & Lacak Logistik</h3>
+                        <p class="text-[11px] text-gray-500">Pantau progres pengiriman pesanan Anda secara real-time.</p>
+                    </div>
+                </div>
+                <div id="buyer-status-list" class="space-y-3"></div>
+            </section>
+
+            <!-- 7. MENU KASBON & TAGIHAN (JATUH TEMPO) -->
+            <section id="screen-kasbon" class="p-4 space-y-4 hidden pb-16">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold text-gray-800 text-base">Kasbon & Tagihan Tempo</h3>
+                        <p class="text-[11px] text-gray-500">Daftar pembelian berbon beserta tanggal jatuh tempo.</p>
+                    </div>
+                </div>
+                <div id="buyer-kasbon-list" class="space-y-3"></div>
+            </section>
+
+            <!-- 8. PROFIL & REKENING REVERSAL -->
+            <section id="screen-profile" class="p-4 space-y-4 hidden pb-16">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border space-y-4 text-center">
+                    <div id="profile-avatar" class="w-20 h-20 bg-indigo-100 rounded-full mx-auto flex items-center justify-center overflow-hidden border-2 border-indigo-500 shadow-sm"></div>
                     <div>
                         <h3 id="profile-name" class="font-bold text-gray-900 text-lg"></h3>
                         <p id="profile-phone" class="text-xs text-gray-500 font-mono"></p>
@@ -188,7 +241,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border space-y-4">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border space-y-4">
                     <h4 class="font-bold text-sm text-indigo-900"><i class="fa-solid fa-wallet mr-1"></i> Rekening Reversal (Refund) Utama</h4>
                     <p class="text-xs text-gray-500">Nomor ini digunakan supervisor untuk mentransfer kembali saldo jika Anda melakukan pembatalan/retur.</p>
                     
@@ -219,33 +272,100 @@
 
         </main>
 
-        <!-- BOTTOM NAV KELILING APLIKASI PEMBELI -->
-        <nav id="bottom-nav" class="bg-white border-t h-16 flex items-center justify-around px-4 shrink-0 absolute bottom-0 left-0 right-0 shadow-lg hidden z-20">
-            <button onclick="switchBuyerTab('catalog')" id="nav-cat" class="flex flex-col items-center text-indigo-600 text-xs font-bold"><i class="fa-solid fa-store text-base mb-0.5"></i><span>Belanja</span></button>
-            <button onclick="switchBuyerTab('orders')" id="nav-ord" class="flex flex-col items-center text-gray-400 text-xs font-medium"><i class="fa-solid fa-receipt text-base mb-0.5"></i><span>Pesanan</span></button>
-            <button onclick="switchBuyerTab('profile')" id="nav-pro" class="flex flex-col items-center text-gray-400 text-xs font-medium"><i class="fa-solid fa-user text-base mb-0.5"></i><span>Profil</span></button>
+        <!-- MODAL CHECKOUT PEMBAYARAN -->
+        <div id="checkout-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-3xl w-full max-w-sm overflow-hidden shadow-2xl">
+                <div class="px-6 py-4 bg-indigo-600 text-white flex justify-between items-center">
+                    <h3 class="font-bold text-sm"><i class="fa-solid fa-credit-card mr-2"></i> Konfirmasi Pembayaran</h3>
+                    <button onclick="closeCheckoutModal()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div class="bg-indigo-50 p-3 rounded-2xl border border-indigo-100">
+                        <p class="text-[10px] font-bold text-indigo-700 uppercase">Produk Dipilih:</p>
+                        <h4 id="modal-prod-name" class="font-bold text-gray-900 text-sm">Nama Produk</h4>
+                        <p id="modal-prod-price" class="text-indigo-600 font-bold text-base mt-1">Rp 0</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-700 uppercase mb-1">Pilih Metode Pembayaran</label>
+                        <select id="modal-pay-method" class="w-full border rounded-xl px-3 py-2.5 text-xs bg-white outline-none font-semibold text-gray-800 focus:ring-2 focus:ring-indigo-500">
+                            <option value="BRI VA">BRI Virtual Account (BRIVA)</option>
+                            <option value="Mandiri VA">Mandiri Virtual Account</option>
+                            <option value="BNI VA">BNI Virtual Account</option>
+                            <option value="BCA VA">BCA Virtual Account</option>
+                            <option value="Kasbon">Kasbon / Tempo (Negosiasi SPV)</option>
+                            <option value="Cash">Cash (Bayar di Tempat)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-700 uppercase mb-1">Alamat Pengiriman Utama</label>
+                        <textarea id="modal-address" rows="2" class="w-full border rounded-xl px-3 py-2 text-xs text-gray-600 outline-none bg-gray-50" readonly></textarea>
+                    </div>
+
+                    <button onclick="submitCheckoutOrder()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg transition text-xs">Buat Pesanan Sekarang</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM NAV RAPI & PROPOSIONAL -->
+        <nav id="bottom-nav" class="bg-white border-t h-16 flex items-center justify-around px-1 shrink-0 absolute bottom-0 left-0 right-0 shadow-lg hidden z-20">
+            <button onclick="switchBuyerTab('catalog')" id="nav-cat" class="flex flex-col items-center justify-center text-indigo-600 text-[10px] font-bold w-1/5 py-1">
+                <i class="fa-solid fa-store text-sm mb-0.5"></i>
+                <span>Belanja</span>
+            </button>
+            <button onclick="switchBuyerTab('orders')" id="nav-ord" class="flex flex-col items-center justify-center text-gray-400 text-[10px] font-medium w-1/5 py-1">
+                <i class="fa-solid fa-receipt text-sm mb-0.5"></i>
+                <span>Pesanan</span>
+            </button>
+            <button onclick="switchBuyerTab('status')" id="nav-status" class="flex flex-col items-center justify-center text-gray-400 text-[10px] font-medium w-1/5 py-1">
+                <i class="fa-solid fa-truck-fast text-sm mb-0.5"></i>
+                <span>Status</span>
+            </button>
+            <button onclick="switchBuyerTab('kasbon')" id="nav-kasbon" class="flex flex-col items-center justify-center text-gray-400 text-[10px] font-medium w-1/5 py-1">
+                <i class="fa-solid fa-file-invoice-dollar text-sm mb-0.5"></i>
+                <span>Kasbon</span>
+            </button>
+            <button onclick="switchBuyerTab('profile')" id="nav-pro" class="flex flex-col items-center justify-center text-gray-400 text-[10px] font-medium w-1/5 py-1">
+                <i class="fa-solid fa-user text-sm mb-0.5"></i>
+                <span>Profil</span>
+            </button>
         </nav>
 
     </div>
 
-    <!-- JAVASCRIPT APLIKASI KONSUMEN -->
+    <!-- JAVASCRIPT -->
     <script>
-        // Database Lokal Penyimpanan Browser
         let buyerSession = JSON.parse(localStorage.getItem('maztri_buyer_session')) || null;
         let registeredBuyers = JSON.parse(localStorage.getItem('maztri_registered_buyers')) || [];
+        
+        // 15 PRODUK PREVIEW LENGKAP DENGAN BERBAGAI KATEGORI
         let products = JSON.parse(localStorage.getItem('maztri_products')) || [
-            { id: 1, name: 'Kemeja Flanel', price: 125000, image: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=400', category: 'Pakaian', desc: 'Bahan tebal dan nyaman.' }
+            { id: 1, name: 'Kemeja Flanel Premium', price: 125000, category: 'Pakaian', image: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=400', desc: 'Bahan tebal, adem, dan nyaman dipakai sehari-hari.', spec: 'Bahan: Katun Flanel\nUkuran: M, L, XL\nWarna: Kotak Merah Hitam' },
+            { id: 2, name: 'Celana Jeans Pria', price: 185000, category: 'Pakaian', image: 'https://images.unsplash.com/photo-1542272604-787c9635c53c?w=400', desc: 'Denim stretch berkualitas tinggi, kuat dan stylish.', spec: 'Bahan: Jeans Stretch\nModel: Slim Fit\nWarna: Biru Dongker' },
+            { id: 3, name: 'Jaket Hoodie Polos', price: 150000, category: 'Pakaian', image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400', desc: 'Hoodie fleece tebal hangat tidak panas.', spec: 'Bahan: Fleece Katun\nUkuran: L & XL\nWarna: Hitam Pekat' },
+            { id: 4, name: 'Keripik Singkong Balado', price: 18000, category: 'Makanan', image: 'https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=400', desc: 'Renyah dengan bumbu balado pedas manis gurih.', spec: 'Berat: 250 gram\nKemasan: Pouch Ziplock' },
+            { id: 5, name: 'Sambal Roa Special', price: 45000, category: 'Makanan', image: 'https://images.unsplash.com/photo-1583225228018-d6c1b4497330?w=400', desc: 'Sambal ikan roa khas Manado pedas mantap.', spec: 'Berat: 200 gram\nKetahanan: 3 Bulan' },
+            { id: 6, name: 'Madu Hutan Asli 500ml', price: 95000, category: 'Makanan', image: 'https://images.unsplash.com/photo-1587049352847-4a222e784d38?w=400', desc: 'Madu murni dari lebah hutan liar kaya manfaat.', spec: 'Volume: 500 ml\nJenis: Madu Multi-floral' },
+            { id: 7, name: 'Powerbank 10000mAh', price: 165000, category: 'Elektronik', image: 'https://images.unsplash.com/photo-1609592424104-9355f15d7426?w=400', desc: 'Kapasitas besar dengan fitur fast charging 22.5W.', spec: 'Port: Dual USB & Type-C\nGaransi: 1 Tahun' },
+            { id: 8, name: 'Earphone Bluetooth TWS', price: 135000, category: 'Elektronik', image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400', desc: 'Suara jernih bass mantap tanpa kabel.', spec: 'Bluetooth: v5.3\nBaterai: Hingga 20 Jam' },
+            { id: 9, name: 'Kabel Data Fast Charging 3in1', price: 45000, category: 'Elektronik', image: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=400', desc: 'Kabel kuat kepang nilon untuk semua jenis HP.', spec: 'Panjang: 1 Meter\nSupport: QC 3.0' },
+            { id: 10, name: 'Beras Premium 5 Kg', price: 72000, category: 'Kebutuhan Pokok', image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400', desc: 'Beras pulen putih bersih tanpa pemutih buatan.', spec: 'Berat: 5 Kg\nKualitas: Setra Ramos' },
+            { id: 11, name: 'Minyak Goreng 2 Liter', price: 38000, category: 'Kebutuhan Pokok', image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400', desc: 'Minyak kelapa sawit jernih jaminan gorengan renyah.', spec: 'Volume: 2 Liter\nKemasan: Pouch Refill' },
+            { id: 12, name: 'Gula Pasir Putih 1 Kg', price: 16500, category: 'Kebutuhan Pokok', image: 'https://images.unsplash.com/photo-1581441363689-1f3c3c55c2f5?w=400', desc: 'Gula tebu murni manis alami berkualitas.', spec: 'Berat: 1 Kg\nKemasan: Plastik Vacum' },
+            { id: 13, name: 'Telur Ayam Segar 1 Kg', price: 28000, category: 'Kebutuhan Pokok', image: 'https://images.unsplash.com/photo-1587486913049-53fc88980cfc?w=400', desc: 'Telur ayam negeri segar pilihan langsung dari farm.', spec: 'Berat: 1 Kg (Isi ± 16 butir)' },
+            { id: 14, name: 'Kecap Manis Refill 550ml', price: 21000, category: 'Kebutuhan Pokok', image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400', desc: 'Kecap manis kental dari biji kedelai pilihan.', spec: 'Volume: 550 ml\nRasa: Gurih Manis' },
+            { id: 15, name: 'Sabun Mandi Cair 450ml', price: 25000, category: 'Kebutuhan Pokok', image: 'https://images.unsplash.com/photo-1585232004423-2db360b43063?w=400', desc: 'Wangi tahan lama membunuh kuman secara menyeluruh.', spec: 'Volume: 450 ml\nFormula: Antibacterial' }
         ];
+
         let orders = JSON.parse(localStorage.getItem('maztri_orders')) || [];
         
         let activeCategory = 'Semua';
-        let otpFlow = ''; 
-        let tempUserData = null; 
         let tempRegData = {};
+        let selectedProductForCheckout = null;
 
         window.onload = function() {
             if (buyerSession) {
-                // Jika sudah ada sesi aktif, langsung masuk beranda
                 showScreen('screen-catalog');
                 document.getElementById('header-user-badge').innerText = buyerSession.name;
                 document.getElementById('header-user-badge').classList.remove('hidden');
@@ -253,7 +373,6 @@
                 renderBuyerCatalog();
                 setupRandomBanner();
             } else {
-                // Jika tidak ada sesi aktif, paksa ke halaman Login
                 showScreen('screen-login');
             }
         };
@@ -266,25 +385,26 @@
         function gotoLogin() { showScreen('screen-login'); }
         function gotoRegister() { showScreen('screen-register'); }
 
-        // ============================
-        // FUNGSI LOGIN & REGISTRASI
-        // ============================
-        
+        // LOGIN DENGAN NOMOR HP & PASSWORD
         function handleLoginSubmit(e) {
             e.preventDefault();
             const phone = document.getElementById('login-phone').value.trim();
+            const password = document.getElementById('login-password').value.trim();
             
-            // Cek apakah nomor ada di database pendaftar lokal
-            const userExists = registeredBuyers.find(u => u.phone === phone);
+            const user = registeredBuyers.find(u => u.phone === phone && u.password === password);
             
-            if (userExists) {
-                tempUserData = userExists;
-                otpFlow = 'login';
-                document.getElementById('otp-phone-label').innerText = phone;
-                showScreen('screen-otp');
-                alert("Simulasi WhatsApp: Kode OTP Login Anda adalah [ 1234 ]");
+            if (user) {
+                buyerSession = user;
+                localStorage.setItem('maztri_buyer_session', JSON.stringify(buyerSession));
+                document.getElementById('header-user-badge').innerText = buyerSession.name;
+                document.getElementById('header-user-badge').classList.remove('hidden');
+                document.getElementById('bottom-nav').classList.remove('hidden');
+                
+                alert("Login Berhasil! Selamat berbelanja.");
+                switchBuyerTab('catalog');
+                setupRandomBanner();
             } else {
-                alert("Nomor HP belum terdaftar! Silakan klik 'Daftar Akun Baru' di bawah.");
+                alert("Nomor HP atau Password salah! Periksa kembali data Anda.");
             }
         }
 
@@ -301,71 +421,52 @@
             }
         }
 
+        // PENDAFTARAN ATAU RESET PASSWORD OTOMATIS
         function handleRegisterSubmit(e) {
             e.preventDefault();
             const phone = document.getElementById('reg-phone').value.trim();
             
-            // Cek apakah nomor sudah dipakai
-            if (registeredBuyers.find(u => u.phone === phone)) {
-                alert("Nomor HP ini sudah terdaftar! Silakan langsung masuk (Login).");
-                gotoLogin();
-                return;
+            const newBuyer = {
+                name: document.getElementById('reg-name').value.trim(),
+                phone: phone,
+                password: document.getElementById('reg-password').value.trim(),
+                address: document.getElementById('reg-address').value.trim(),
+                email: document.getElementById('reg-email').value.trim(),
+                selfie: tempRegData.selfie || '',
+                revType: 'DANA',
+                revNum: phone
+            };
+
+            const existingIndex = registeredBuyers.findIndex(u => u.phone === phone);
+            if (existingIndex !== -1) {
+                registeredBuyers[existingIndex] = newBuyer;
+                alert("Nomor sudah terdaftar. Data & Password berhasil di-reset!");
+            } else {
+                registeredBuyers.push(newBuyer);
+                alert("Pendaftaran Akun Baru Berhasil!");
             }
 
-            tempRegData.name = document.getElementById('reg-name').value.trim();
-            tempRegData.phone = phone;
-            tempRegData.address = document.getElementById('reg-address').value.trim();
-            tempRegData.email = document.getElementById('reg-email').value.trim();
-            tempRegData.revType = 'DANA';
-            tempRegData.revNum = phone; // default
+            localStorage.setItem('maztri_registered_buyers', JSON.stringify(registeredBuyers));
 
-            tempUserData = tempRegData;
-            otpFlow = 'register';
-            document.getElementById('otp-phone-label').innerText = phone;
-            showScreen('screen-otp');
-            alert("Simulasi WhatsApp: Kode OTP Pendaftaran Anda adalah [ 1234 ]");
-        }
-
-        function moveToNext(el, index) {
-            if(el.value.length >= 1) {
-                const inputs = document.querySelectorAll('.otp-input');
-                if(index < inputs.length) inputs[index].focus();
-            }
-        }
-
-        function verifyOtpCode() {
-            buyerSession = tempUserData;
-
-            // Jika alurnya daftar, simpan data ke database pendaftar
-            if (otpFlow === 'register') {
-                registeredBuyers.push(buyerSession);
-                localStorage.setItem('maztri_registered_buyers', JSON.stringify(registeredBuyers));
-            }
-            
-            // Buat Sesi Login Aktif
+            buyerSession = newBuyer;
             localStorage.setItem('maztri_buyer_session', JSON.stringify(buyerSession));
-            
+
             document.getElementById('header-user-badge').innerText = buyerSession.name;
             document.getElementById('header-user-badge').classList.remove('hidden');
             document.getElementById('bottom-nav').classList.remove('hidden');
-            
-            // Kosongkan input OTP untuk keamanan
-            document.querySelectorAll('.otp-input').forEach(i => i.value = '');
 
-            alert(otpFlow === 'register' ? "Pendaftaran Berhasil! Selamat berbelanja." : "Login Berhasil! Selamat datang kembali.");
             switchBuyerTab('catalog');
             setupRandomBanner();
         }
 
-        // ============================
-        // NAVIGASI BAWAH & KONTEN
-        // ============================
-
+        // TAB NAV RAPI
         function switchBuyerTab(tab) {
-            ['nav-cat', 'nav-ord', 'nav-pro'].forEach(id => {
+            ['nav-cat', 'nav-ord', 'nav-status', 'nav-kasbon', 'nav-pro'].forEach(id => {
                 const el = document.getElementById(id);
-                el.classList.remove('text-indigo-600', 'font-bold');
-                el.classList.add('text-gray-400', 'font-medium');
+                if(el) {
+                    el.classList.remove('text-indigo-600', 'font-bold');
+                    el.classList.add('text-gray-400', 'font-medium');
+                }
             });
 
             if(tab === 'catalog') {
@@ -379,6 +480,16 @@
                 document.getElementById('nav-ord').classList.add('text-indigo-600', 'font-bold');
                 document.getElementById('nav-ord').classList.remove('text-gray-400', 'font-medium');
                 renderBuyerOrders();
+            } else if(tab === 'status') {
+                showScreen('screen-status');
+                document.getElementById('nav-status').classList.add('text-indigo-600', 'font-bold');
+                document.getElementById('nav-status').classList.remove('text-gray-400', 'font-medium');
+                renderBuyerStatus();
+            } else if(tab === 'kasbon') {
+                showScreen('screen-kasbon');
+                document.getElementById('nav-kasbon').classList.add('text-indigo-600', 'font-bold');
+                document.getElementById('nav-kasbon').classList.remove('text-gray-400', 'font-medium');
+                renderBuyerKasbon();
             } else if(tab === 'profile') {
                 showScreen('screen-profile');
                 document.getElementById('nav-pro').classList.add('text-indigo-600', 'font-bold');
@@ -416,46 +527,121 @@
             let html = '';
             filtered.forEach(p => {
                 html += `
-                    <div class="bg-white rounded-2xl border p-3 shadow-sm flex flex-col justify-between">
+                    <div onclick="viewProductDetail(${p.id})" class="bg-white rounded-2xl border p-3 shadow-sm flex flex-col justify-between cursor-pointer hover:shadow-md transition">
                         <div>
-                            <img src="${p.image}" class="h-28 w-full object-cover rounded-xl mb-2 border">
+                            <img src="${p.image}" class="h-32 w-full object-cover rounded-xl mb-2 border">
                             <h4 class="font-bold text-xs text-gray-800 line-clamp-1">${p.name}</h4>
                             <p class="text-[10px] text-purple-600 font-semibold mb-1">${p.category || 'Umum'}</p>
-                            <p class="text-indigo-600 font-bold text-sm">Rp ${p.price.toLocaleString('id-ID')}</p>
+                            <p class="text-indigo-600 font-extrabold text-sm">Rp ${p.price.toLocaleString('id-ID')}</p>
                         </div>
-                        <button onclick="checkoutProduct(${p.id}, '${p.name}', ${p.price})" class="mt-3 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-xl text-xs font-bold shadow transition">Beli Sekarang</button>
+                        <div class="mt-3 w-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white py-2 rounded-xl text-xs font-bold text-center transition">Lihat Detail</div>
                     </div>
                 `;
             });
             grid.innerHTML = html || `<p class="text-center text-gray-400 text-xs col-span-2 py-8">Tidak ada produk dalam kategori "${activeCategory}".</p>`;
         }
 
-        function checkoutProduct(id, name, price) {
-            const payMethod = prompt("Pilih Metode Pembayaran:\n1. Mandiri VA / Multi-Bank\n2. Kasbon / Tempo\n3. Cash (Bayar di tempat)\n\nKetik pilihan (1/2/3):", "1");
-            if(!payMethod) return;
+        // BUKA HALAMAN DETAIL PRODUK
+        function viewProductDetail(id) {
+            const prod = products.find(p => p.id === id);
+            if(!prod) return;
 
-            let methodStr = 'Mandiri VA';
-            if(payMethod === '2') methodStr = 'Kasbon';
-            if(payMethod === '3') methodStr = 'Cash';
+            document.getElementById('detail-img').src = prod.image;
+            document.getElementById('detail-category').innerText = prod.category || 'Umum';
+            document.getElementById('detail-name').innerText = prod.name;
+            document.getElementById('detail-price').innerText = `Rp ${prod.price.toLocaleString('id-ID')}`;
+            document.getElementById('detail-desc').innerText = prod.desc || 'Tidak ada deskripsi produk.';
+            document.getElementById('detail-spec').innerText = prod.spec || 'Spesifikasi standar toko.';
+            
+            document.getElementById('detail-buy-btn').onclick = function() {
+                openCheckoutModal(prod.id, prod.name, prod.price);
+            };
+
+            showScreen('screen-product-detail');
+        }
+
+        // MODAL CHECKOUT
+        function openCheckoutModal(id, name, price) {
+            selectedProductForCheckout = { id, name, price };
+            document.getElementById('modal-prod-name').innerText = name;
+            document.getElementById('modal-prod-price').innerText = `Rp ${price.toLocaleString('id-ID')}`;
+            document.getElementById('modal-address').value = buyerSession.address;
+            document.getElementById('checkout-modal').classList.remove('hidden');
+            document.getElementById('checkout-modal').classList.add('flex');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+            document.getElementById('checkout-modal').classList.remove('flex');
+        }
+
+        function submitCheckoutOrder() {
+            const payMethod = document.getElementById('modal-pay-method').value;
+            
+            let vaInfo = '';
+            if (payMethod.includes('VA')) {
+                let prefix = '88888'; // Default BRIVA
+                if (payMethod.includes('Mandiri')) prefix = '89888';
+                else if (payMethod.includes('BNI')) prefix = '82777';
+                else if (payMethod.includes('BCA')) prefix = '70012';
+                
+                let cleanPhone = buyerSession.phone ? buyerSession.phone.replace(/^0/, '') : '123456789';
+                vaInfo = prefix + cleanPhone;
+            }
+
+            let dueDate = '';
+            if (payMethod === 'Kasbon') {
+                let d = new Date();
+                d.setDate(d.getDate() + 30);
+                dueDate = d.toISOString().split('T')[0];
+            }
 
             const newOrd = {
                 id: `ORD-${Math.floor(1000+Math.random()*9000)}`,
                 customer: buyerSession.name,
-                total: price,
-                payment: methodStr,
-                status: methodStr === 'Kasbon' ? 'Pending Nego' : 'Pending',
+                phone: buyerSession.phone,
+                total: selectedProductForCheckout.price,
+                payment: payMethod,
+                vaNumber: vaInfo,
+                status: payMethod === 'Kasbon' ? 'Pending Nego Kasbon' : 'Pending',
                 delivery: 'Menunggu Diproses',
                 time: new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}),
-                kasbonDate: methodStr === 'Kasbon' ? '2026-03-30' : '',
+                kasbonDate: dueDate,
                 category: activeCategory
             };
 
             orders.unshift(newOrd);
             localStorage.setItem('maztri_orders', JSON.stringify(orders));
-            alert(`Pesanan [${newOrd.id}] berhasil dibuat! Data terkirim otomatis ke sistem pengelola.`);
-            switchBuyerTab('orders');
+
+            if (payMethod === 'Kasbon') {
+                let kasbonList = JSON.parse(localStorage.getItem('maztri_kasbon_requests')) || [];
+                kasbonList.unshift({
+                    id: newOrd.id,
+                    customer: buyerSession.name,
+                    phone: buyerSession.phone,
+                    total: selectedProductForCheckout.price,
+                    dueDate: dueDate,
+                    status: 'Menunggu Persetujuan SPV'
+                });
+                localStorage.setItem('maztri_kasbon_requests', JSON.stringify(kasbonList));
+            }
+
+            closeCheckoutModal();
+
+            let successMsg = `Pesanan [${newOrd.id}] berhasil dibuat!\n\nMetode Pembayaran: ${payMethod}`;
+            if (vaInfo) {
+                successMsg += `\nNomor Virtual Account:\n[ ${vaInfo} ]`;
+            } else if (payMethod === 'Kasbon') {
+                successMsg += `\nPengajuan Kasbon dikirim ke Supervisor untuk persetujuan tanggal jatuh tempo [${dueDate}].`;
+            } else {
+                successMsg += `\nSilakan lakukan pembayaran tunai saat barang diterima.`;
+            }
+
+            alert(successMsg);
+            switchBuyerTab(payMethod === 'Kasbon' ? 'kasbon' : 'status');
         }
 
+        // 1. RENDER RIWAYAT NOTA PESANAN
         function renderBuyerOrders() {
             const list = document.getElementById('buyer-orders-list');
             const myOrders = orders.filter(o => o.customer === (buyerSession ? buyerSession.name : ''));
@@ -465,24 +651,91 @@
                     <div class="bg-white p-4 rounded-2xl border shadow-sm space-y-2">
                         <div class="flex justify-between items-center">
                             <span class="font-bold text-xs text-indigo-600">${o.id}</span>
-                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${o.status.includes('Selesai')?'bg-emerald-100 text-emerald-700':'bg-amber-100 text-amber-700'}">${o.status}</span>
+                            <span class="text-xs font-bold text-gray-700">Rp ${o.total.toLocaleString('id-ID')}</span>
                         </div>
-                        <div class="flex justify-between items-center text-xs">
-                            <span class="text-gray-600 font-medium">${o.payment}</span>
-                            <span class="font-bold text-gray-800">Rp ${o.total.toLocaleString('id-ID')}</span>
-                        </div>
-                        <div class="pt-2 border-t flex justify-between items-center text-[11px]">
-                            <span class="text-emerald-600 font-semibold"><i class="fa-solid fa-truck mr-1"></i> ${o.delivery}</span>
-                            ${o.status !== 'Refund Selesai & Lunas' ? `<button onclick="requestReturnOrCancel('${o.id}',${o.total})" class="text-rose-600 font-bold hover:underline">Retur & Reversal Saldo</button>` : '<span class="text-gray-400">Selesai</span>'}
+                        <div class="text-[11px] text-gray-500 flex justify-between">
+                            <span>Metode: ${o.payment}</span>
+                            <span>Waktu: ${o.time}</span>
                         </div>
                     </div>
                 `;
             });
-            list.innerHTML = html || '<p class="text-center text-gray-400 text-xs py-8">Belum ada riwayat pesanan.</p>';
+            list.innerHTML = html || '<p class="text-center text-gray-400 text-xs py-8">Belum ada riwayat nota pesanan.</p>';
+        }
+
+        // 2. RENDER STATUS PESANAN & LACAK LOGISTIK
+        function renderBuyerStatus() {
+            const list = document.getElementById('buyer-status-list');
+            const myOrders = orders.filter(o => o.customer === (buyerSession ? buyerSession.name : ''));
+            let html = '';
+            myOrders.forEach(o => {
+                let badgeColor = 'bg-amber-100 text-amber-700';
+                if(o.status.includes('Lunas') || o.status.includes('Selesai')) badgeColor = 'bg-emerald-100 text-emerald-700';
+                if(o.status.includes('Retur') || o.status.includes('Batal')) badgeColor = 'bg-rose-100 text-rose-700';
+
+                html += `
+                    <div class="bg-white p-4 rounded-2xl border shadow-sm space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-xs text-indigo-600">${o.id}</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${badgeColor}">${o.status}</span>
+                        </div>
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="text-gray-600 font-medium">Total: <strong class="text-gray-800">Rp ${o.total.toLocaleString('id-ID')}</strong></span>
+                            <span class="text-gray-500 text-[11px]">${o.payment}</span>
+                        </div>
+                        ${o.vaNumber ? `
+                            <div class="bg-indigo-50 p-2.5 rounded-xl border border-indigo-100 text-xs flex justify-between items-center">
+                                <div>
+                                    <p class="text-[10px] font-bold text-indigo-700 uppercase">Nomor Virtual Account:</p>
+                                    <p class="font-mono font-bold text-indigo-900">${o.vaNumber}</p>
+                                </div>
+                                <span class="text-[10px] bg-indigo-600 text-white px-2 py-1 rounded-lg font-bold">VA Aktif</span>
+                            </div>
+                        ` : ''}
+                        <div class="bg-gray-50 p-3 rounded-xl border text-[11px] space-y-1">
+                            <p class="font-bold text-gray-700"><i class="fa-solid fa-truck-fast text-indigo-600 mr-1"></i> Posisi Logistik:</p>
+                            <p class="text-emerald-600 font-semibold">${o.delivery}</p>
+                        </div>
+                        <div class="pt-1 flex justify-end">
+                            ${o.status !== 'Refund Selesai & Lunas' && !o.status.includes('Retur') ? `<button onclick="requestReturnOrCancel('${o.id}',${o.total})" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-1.5 rounded-xl font-bold transition"><i class="fa-solid fa-rotate-left mr-1"></i> Retur & Reversal Saldo</button>` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+            list.innerHTML = html || '<p class="text-center text-gray-400 text-xs py-8">Belum ada status pesanan aktif.</p>';
+        }
+
+        // 3. RENDER KHUSUS KASBON & JATUH TEMPO
+        function renderBuyerKasbon() {
+            const list = document.getElementById('buyer-kasbon-list');
+            const myKasbonOrders = orders.filter(o => o.customer === (buyerSession ? buyerSession.name : '') && o.payment === 'Kasbon');
+            let html = '';
+            myKasbonOrders.forEach(o => {
+                let badgeColor = 'bg-amber-100 text-amber-700';
+                if(o.status.includes('Disetujui') || o.status.includes('Lunas')) badgeColor = 'bg-emerald-100 text-emerald-700';
+                
+                html += `
+                    <div class="bg-white p-4 rounded-2xl border shadow-sm space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-xs text-indigo-600">${o.id} (Kasbon)</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${badgeColor}">${o.status}</span>
+                        </div>
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="text-gray-600">Tagihan: <strong class="text-gray-900">Rp ${o.total.toLocaleString('id-ID')}</strong></span>
+                        </div>
+                        <div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs space-y-1">
+                            <p class="font-bold text-amber-900"><i class="fa-solid fa-calendar-days mr-1"></i> Tanggal Jatuh Tempo:</p>
+                            <p class="font-mono font-bold text-amber-800 text-sm">${o.kasbonDate || 'Menunggu Penentuan SPV'}</p>
+                            <p class="text-[10px] text-amber-700 mt-0.5">Harap melunasi sebelum atau pada tanggal tersebut agar tidak dikenakan denda keterlambatan.</p>
+                        </div>
+                    </div>
+                `;
+            });
+            list.innerHTML = html || '<p class="text-center text-gray-400 text-xs py-8">Tidak ada tagihan kasbon aktif.</p>';
         }
 
         function requestReturnOrCancel(orderId, orderTotal) {
-            if(confirm(`Ajukan pembatalan / retur untuk pesanan [${orderId}]? Saldo sebesar Rp ${orderTotal.toLocaleString('id-ID')} akan direfund ke rekening reversal Anda (${buyerSession.revType}: ${buyerSession.revNum}) setelah disetujui Supervisor.`)) {
+            if(confirm(`Ajukan pembatalan / retur untuk pesanan [${orderId}]? Saldo sebesar Rp ${orderTotal.toLocaleString('id-ID')} akan direfund ke rekening (${buyerSession.revType}: ${buyerSession.revNum}) setelah disetujui Supervisor.`)) {
                 
                 const ord = orders.find(o => o.id === orderId);
                 if(ord) {
@@ -506,8 +759,8 @@
                 });
                 localStorage.setItem('maztri_customers', JSON.stringify(savedCust));
 
-                alert("Pengajuan berhasil! Supervisor akan segera memproses transfer reversal saldo Anda.");
-                renderBuyerOrders();
+                alert("Pengajuan berhasil dikirim ke Supervisor!");
+                renderBuyerStatus();
             }
         }
 
@@ -532,10 +785,7 @@
             buyerSession.revType = document.getElementById('b-rev-type').value;
             buyerSession.revNum = document.getElementById('b-rev-num').value.trim();
             
-            // Update the session
             localStorage.setItem('maztri_buyer_session', JSON.stringify(buyerSession));
-            
-            // Also update the master record in registeredBuyers so it persists after re-login
             const userIndex = registeredBuyers.findIndex(u => u.phone === buyerSession.phone);
             if(userIndex !== -1) {
                 registeredBuyers[userIndex] = buyerSession;
@@ -546,13 +796,12 @@
         }
 
         function handleBuyerLogout() {
-            if(confirm('Apakah Anda yakin ingin keluar dari aplikasi?')) {
+            if(confirm('Keluar dari aplikasi?')) {
                 localStorage.removeItem('maztri_buyer_session');
-                location.reload(); // Refresh akan otomatis memicu layar Login
+                location.reload();
             }
         }
 
-        // Real-time listener sinkronisasi lintas tab/browser
         window.addEventListener('storage', function(e) {
             if (e.key === 'maztri_orders' || e.key === 'maztri_products') {
                 orders = JSON.parse(localStorage.getItem('maztri_orders')) || [];
@@ -560,6 +809,8 @@
                 if (buyerSession) {
                     renderBuyerCatalog();
                     renderBuyerOrders();
+                    renderBuyerStatus();
+                    renderBuyerKasbon();
                     setupRandomBanner();
                     document.getElementById('buyer-audio').play().catch(err=>{});
                 }
