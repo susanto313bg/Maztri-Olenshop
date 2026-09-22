@@ -289,7 +289,7 @@
                 
                 <p class="px-3 pt-3 pb-1 text-[10px] uppercase font-bold text-slate-500">Operasional Transaksi</p>
                 <a href="#" onclick="switchAdminTab('chat')" id="nav-chat" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white"><i class="fa-solid fa-comments w-4 text-center"></i><span>Chat & Notifikasi</span><span id="badge-chat" class="ml-auto bg-rose-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold hidden">0</span></a>
-                <a href="#" onclick="switchAdminTab('orders')" id="nav-orders" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white"><i class="fa-solid fa-receipt w-4 text-center"></i><span>Semua Pesanan</span></a>
+                <a href="#" onclick="switchAdminTab('orders')" id="nav-orders" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white"><i class="fa-solid fa-receipt w-4 text-center"></i><span>Semua Pesanan & Hapus</span></a>
                 <a href="#" onclick="switchAdminTab('delivery')" id="nav-delivery" class="flex items-center space-x-3 px-3 py-2.5 rounded-xl transition hover:bg-slate-800 hover:text-white text-emerald-400"><i class="fa-solid fa-truck-fast w-4 text-center"></i><span>Status Pengiriman</span></a>
                 
                 <!-- MENU ADMIN -->
@@ -458,12 +458,12 @@
                     </div>
                 </section>
 
-                <!-- 6. SEMUA PESANAN -->
+                <!-- 6. SEMUA PESANAN & HAPUS -->
                 <section id="tab-orders" class="admin-tab hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border p-6 overflow-x-auto">
                         <table class="w-full text-left text-sm">
                             <thead class="bg-gray-50 text-gray-500 uppercase text-xs font-semibold">
-                                <tr><th class="p-3">ID Pesanan</th><th class="p-3">Pembeli</th><th class="p-3">Metode</th><th class="p-3">Status</th><th class="p-3 text-right">Total</th></tr>
+                                <tr><th class="p-3">ID Pesanan</th><th class="p-3">Pembeli</th><th class="p-3">Metode</th><th class="p-3">Status</th><th class="p-3 text-right">Aksi Hapus</th></tr>
                             </thead>
                             <tbody id="orders-table" class="divide-y divide-gray-100"></tbody>
                         </table>
@@ -503,7 +503,7 @@
                     </div>
                 </section>
 
-                <!-- 8. REKENING & QRIS TOKO (DENGAN UPLOAD FILE GAMBAR) -->
+                <!-- 8. REKENING & QRIS TOKO -->
                 <section id="tab-store-accounts" class="admin-tab hidden space-y-6">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-gray-800 text-lg">Gambar QRIS & Rekening Toko</h3>
@@ -594,7 +594,7 @@
         </div>
     </div>
 
-    <!-- MODAL UPLOAD REKENING / QRIS TOKO (DENGAN FILE UPLOAD) -->
+    <!-- MODAL UPLOAD REKENING / QRIS TOKO -->
     <div id="store-account-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-4">
             <h3 class="font-bold text-gray-900"><i class="fa-solid fa-qrcode text-indigo-600 mr-1"></i> Upload Gambar QRIS / Rekening Toko</h3>
@@ -1015,12 +1015,32 @@
             }
         }
 
+        // FUNGSI HAPUS RIWAYAT PESANAN OLEH PEMBELI
+        function deleteBuyerOrder(orderId) {
+            if (confirm(`Apakah Anda yakin ingin menghapus riwayat pesanan [${orderId}] ini?`)) {
+                window.remove(window.ref(window.db, 'orders/' + orderId)).then(() => {
+                    alert("Riwayat pesanan berhasil dihapus.");
+                });
+            }
+        }
+
         function renderBuyerOrders() {
             const list = document.getElementById('buyer-orders-list');
             const myOrders = globalOrders.filter(o => o.customer === currentUser.name);
             let html = '';
             myOrders.forEach(o => {
-                html += `<div class="bg-white p-4 rounded-2xl border shadow-sm space-y-1"><p class="font-bold text-xs text-indigo-600">${o.id}</p><p class="text-xs">Total: Rp ${o.total.toLocaleString('id-ID')}</p><p class="text-[11px] text-gray-500">Metode: ${o.payment}</p></div>`;
+                html += `
+                    <div class="bg-white p-4 rounded-2xl border shadow-sm space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-xs text-indigo-600">${o.id}</span>
+                            <button onclick="deleteBuyerOrder('${o.id}')" class="bg-rose-50 hover:bg-rose-600 hover:text-white text-rose-600 px-2.5 py-1 rounded-lg text-[10px] font-bold transition">
+                                <i class="fa-solid fa-trash mr-1"></i> Hapus Riwayat
+                            </button>
+                        </div>
+                        <p class="text-xs">Total: Rp ${o.total.toLocaleString('id-ID')}</p>
+                        <p class="text-[11px] text-gray-500">Metode: ${o.payment}</p>
+                    </div>
+                `;
             });
             list.innerHTML = html || '<p class="text-center text-gray-400 text-xs py-8">Belum ada nota pesanan.</p>';
         }
@@ -1030,10 +1050,9 @@
             const list = document.getElementById('buyer-status-list');
             const myOrders = globalOrders.filter(o => o.customer === currentUser.name);
             
-            // Ambil gambar QRIS yang diunggah supervisor (jika ada)
             let uploadedQrisImg = '';
             if (storeAccounts.length > 0) {
-                uploadedQrisImg = storeAccounts[storeAccounts.length - 1].image; // Mengambil QRIS terbaru yang diunggah SPV
+                uploadedQrisImg = storeAccounts[storeAccounts.length - 1].image;
             }
 
             let html = '';
@@ -1107,7 +1126,19 @@
                 }
                 if (o.payment === 'Kasbon' && o.status !== 'Lunas') pendingKasbon++;
 
-                ordHtml += `<tr class="border-b"><td class="p-3 font-bold text-indigo-600">${o.id}</td><td class="p-3">${o.customer}</td><td class="p-3">${o.payment}</td><td class="p-3">${o.status}</td><td class="p-3 text-right font-bold">Rp ${o.total.toLocaleString('id-ID')}</td></tr>`;
+                ordHtml += `
+                    <tr class="border-b">
+                        <td class="p-3 font-bold text-indigo-600">${o.id}</td>
+                        <td class="p-3">${o.customer}</td>
+                        <td class="p-3">${o.payment}</td>
+                        <td class="p-3">${o.status}</td>
+                        <td class="p-3 text-right">
+                            <button onclick="deleteBuyerOrder('${o.id}')" class="bg-rose-50 hover:bg-rose-600 hover:text-white text-rose-600 px-3 py-1 rounded-lg text-xs font-bold transition">
+                                <i class="fa-solid fa-trash mr-1"></i> Hapus
+                            </button>
+                        </td>
+                    </tr>
+                `;
                 
                 if (o.payment === 'Cash') {
                     cashHtml += `<tr class="border-b"><td class="p-3">${o.id}</td><td class="p-3">${o.customer}</td><td class="p-3">Rp ${o.total.toLocaleString('id-ID')}</td><td class="p-3">${o.status}</td><td class="p-3 text-right"><button onclick="verifyCash('${o.id}')" class="bg-emerald-600 text-white px-3 py-1 rounded text-xs font-bold">Terima Uang (Admin)</button></td></tr>`;
