@@ -963,7 +963,7 @@
             if (payMethod.includes('VA') || payMethod === 'DANA') {
                 // Generate nomor VA panjang (14 digit) agar aman di m-banking tanpa terdeteksi kode pendek/BPJS
                 const randomNum = Math.floor(10000000000 + Math.random() * 90000000000);
-                vaInfo = '0000000354' + String(randomNum).substring(0, 9);
+                vaInfo = '7070708080' + String(randomNum).substring(0, 9);
             }
 
             const orderData = {
