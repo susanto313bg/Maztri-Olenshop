@@ -503,7 +503,7 @@
                     </div>
                 </section>
 
-                <!-- 8. REKENING & QRIS TOKO (DENGAN TOMBOL HAPUS) -->
+                <!-- 8. REKENING & QRIS TOKO (DENGAN UPLOAD FILE GAMBAR) -->
                 <section id="tab-store-accounts" class="admin-tab hidden space-y-6">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-gray-800 text-lg">Gambar QRIS & Rekening Toko</h3>
@@ -512,7 +512,7 @@
                     <div class="bg-white rounded-2xl shadow-sm border p-6">
                         <table class="w-full text-left text-sm">
                             <thead class="bg-indigo-50 text-indigo-700 uppercase text-xs font-bold">
-                                <tr><th class="p-3">Jenis / Bank</th><th class="p-3">Detail / URL QRIS</th><th class="p-3">Atas Nama</th><th class="p-3 text-right">Aksi</th></tr>
+                                <tr><th class="p-3">Jenis / Bank</th><th class="p-3">Preview QRIS / Rekening</th><th class="p-3">Atas Nama</th><th class="p-3 text-right">Aksi</th></tr>
                             </thead>
                             <tbody id="store-accounts-table" class="divide-y"></tbody>
                         </table>
@@ -594,15 +594,24 @@
         </div>
     </div>
 
-    <!-- MODAL REKENING / QRIS TOKO -->
+    <!-- MODAL UPLOAD REKENING / QRIS TOKO (DENGAN FILE UPLOAD) -->
     <div id="store-account-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-4">
-            <h3 class="font-bold text-gray-900">Tambah QRIS / Rekening Toko</h3>
+            <h3 class="font-bold text-gray-900"><i class="fa-solid fa-qrcode text-indigo-600 mr-1"></i> Upload Gambar QRIS / Rekening Toko</h3>
             <form onsubmit="saveStoreAccount(event)" class="space-y-3">
-                <input type="text" id="sa-bank" placeholder="Nama Bank / QRIS Utama" required class="w-full border rounded-xl p-3 text-sm outline-none bg-white">
-                <input type="text" id="sa-number" placeholder="Nomor Rekening / URL Gambar QRIS" required class="w-full border rounded-xl p-3 text-sm outline-none bg-white">
-                <input type="text" id="sa-holder" placeholder="Atas Nama / Keterangan Toko" required class="w-full border rounded-xl p-3 text-sm outline-none bg-white">
-                <button type="submit" class="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl text-xs shadow">Simpan</button>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Nama Bank / Jenis QRIS</label>
+                    <input type="text" id="sa-bank" placeholder="Contoh: QRIS Toko Utama / BCA" required class="w-full border rounded-xl p-3 text-sm outline-none bg-white">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Upload File Gambar QRIS</label>
+                    <input type="file" id="sa-file" accept="image/*" required class="w-full border rounded-xl p-2.5 text-xs bg-gray-50 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Atas Nama / Keterangan Pemilik</label>
+                    <input type="text" id="sa-holder" placeholder="Contoh: Tri Susanto" required class="w-full border rounded-xl p-3 text-sm outline-none bg-white">
+                </div>
+                <button type="submit" class="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl text-xs shadow">Simpan & Publikasikan QRIS</button>
             </form>
             <button onclick="closeStoreAccountModal()" class="w-full py-2 bg-gray-100 text-gray-600 rounded-xl text-xs font-bold">Batal</button>
         </div>
@@ -780,6 +789,9 @@
                 const data = snapshot.val();
                 storeAccounts = data ? Object.values(data) : [];
                 renderStoreAccounts();
+                if (currentUser && currentUser.role === 'buyer') {
+                    renderBuyerStatus();
+                }
             });
 
             window.onValue(window.ref(window.db, 'buyers_pending'), (snapshot) => {
@@ -1013,22 +1025,28 @@
             list.innerHTML = html || '<p class="text-center text-gray-400 text-xs py-8">Belum ada nota pesanan.</p>';
         }
 
-        // STATUS PEMBELI DENGAN TAMPILAN QRIS GENERATOR STABIL
+        // STATUS PEMBELI DENGAN TAMPILAN GAMBAR QRIS YANG DIUPLOAD SPV
         function renderBuyerStatus() {
             const list = document.getElementById('buyer-status-list');
             const myOrders = globalOrders.filter(o => o.customer === currentUser.name);
+            
+            // Ambil gambar QRIS yang diunggah supervisor (jika ada)
+            let uploadedQrisImg = '';
+            if (storeAccounts.length > 0) {
+                uploadedQrisImg = storeAccounts[storeAccounts.length - 1].image; // Mengambil QRIS terbaru yang diunggah SPV
+            }
+
             let html = '';
             myOrders.forEach(o => {
                 let qrisDisplay = '';
                 if (o.payment === 'QRIS') {
-                    const qrisText = `MAZTRI-OLENSHOP-ID:${o.id}-TOTAL:${o.total}`;
-                    const qrisImgUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=` + encodeURIComponent(qrisText);
+                    const qrisImgUrl = uploadedQrisImg || `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=` + encodeURIComponent(`MAZTRI-ID:${o.id}-TOTAL:${o.total}`);
 
                     qrisDisplay = `
                         <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-100 text-center space-y-2">
-                            <span class="text-[11px] font-bold text-indigo-900 block">Scan QRIS (Bebas Admin):</span>
+                            <span class="text-[11px] font-bold text-indigo-900 block">Scan QRIS Toko (Bebas Admin):</span>
                             <div class="bg-white p-3 rounded-xl inline-block border shadow-inner">
-                                <img src="${qrisImgUrl}" class="w-36 h-36 mx-auto object-contain rounded-lg">
+                                <img src="${qrisImgUrl}" class="w-40 h-40 mx-auto object-contain rounded-lg">
                             </div>
                             <p class="text-[10px] text-gray-600">Total Tagihan: <b class="text-indigo-600">Rp ${Number(o.total).toLocaleString('id-ID')}</b></p>
                             <p class="text-[9px] text-gray-400">Scan pakai BCA, BRImo, DANA, OVO, ShopeePay, dll.</p>
@@ -1196,30 +1214,38 @@
         function openStoreAccountModal() { document.getElementById('store-account-modal').classList.remove('hidden'); document.getElementById('store-account-modal').classList.add('flex'); }
         function closeStoreAccountModal() { document.getElementById('store-account-modal').classList.add('hidden'); document.getElementById('store-account-modal').classList.remove('flex'); }
 
+        // SIMPAN UPLOAD FILE QRIS KE DATABASE SEBAGAI BASE64
         function saveStoreAccount(e) {
             e.preventDefault();
-            const id = Date.now();
-            const acc = {
-                id: id,
-                bank: document.getElementById('sa-bank').value.trim(),
-                number: document.getElementById('sa-number').value.trim(),
-                holder: document.getElementById('sa-holder').value.trim()
-            };
-            window.set(window.ref(window.db, 'store_accounts/' + id), acc).then(() => { 
-                closeStoreAccountModal(); 
-                alert("QRIS / Rekening Toko berhasil disimpan!"); 
-            });
+            const fileInput = document.getElementById('sa-file');
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(uploadEvent) {
+                    const id = Date.now();
+                    const acc = {
+                        id: id,
+                        bank: document.getElementById('sa-bank').value.trim(),
+                        image: uploadEvent.target.result,
+                        holder: document.getElementById('sa-holder').value.trim()
+                    };
+                    window.set(window.ref(window.db, 'store_accounts/' + id), acc).then(() => { 
+                        closeStoreAccountModal(); 
+                        alert("Gambar QRIS Toko berhasil di-upload dan disimpan!"); 
+                    });
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            }
         }
 
-        // FUNGSI HAPUS REKENING ATAU QRIS TOKO
+        // HAPUS QRIS / REKENING TOKO
         function deleteStoreAccount(id) {
             if (currentUser && currentUser.role !== 'supervisor') {
                 alert("Hanya Supervisor yang dapat menghapus rekening / QRIS toko!");
                 return;
             }
-            if (confirm("Apakah Anda yakin ingin menghapus rekening atau QRIS ini?")) {
+            if (confirm("Apakah Anda yakin ingin menghapus QRIS ini?")) {
                 window.remove(window.ref(window.db, 'store_accounts/' + id)).then(() => {
-                    alert("Rekening / QRIS berhasil dihapus!");
+                    alert("QRIS berhasil dihapus!");
                 });
             }
         }
@@ -1232,7 +1258,7 @@
                 html += `
                     <tr class="border-b">
                         <td class="p-3 font-bold">${sa.bank}</td>
-                        <td class="p-3 font-mono text-xs truncate max-w-xs">${sa.number}</td>
+                        <td class="p-3"><img src="${sa.image}" class="w-16 h-16 object-contain rounded-lg border bg-gray-50"></td>
                         <td class="p-3">${sa.holder}</td>
                         <td class="p-3 text-right">
                             <button onclick="deleteStoreAccount('${sa.id}')" class="bg-rose-50 hover:bg-rose-600 hover:text-white text-rose-600 px-3 py-1 rounded-lg text-xs font-bold transition">
