@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maztri Olenshop - Belanja Aman & Terpercaya</title>
+    
+    <!-- PWA MANIFEST & META TAGS -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -339,7 +346,7 @@
         let buyerSession = JSON.parse(localStorage.getItem('maztri_buyer_session')) || null;
         let registeredBuyers = JSON.parse(localStorage.getItem('maztri_registered_buyers')) || [];
         
-        // 15 PRODUK PREVIEW LENGKAP DENGAN BERBAGAI KATEGORI
+        // 15 PRODUK PREVIEW
         let products = JSON.parse(localStorage.getItem('maztri_products')) || [
             { id: 1, name: 'Kemeja Flanel Premium', price: 125000, category: 'Pakaian', image: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=400', desc: 'Bahan tebal, adem, dan nyaman dipakai sehari-hari.', spec: 'Bahan: Katun Flanel\nUkuran: M, L, XL\nWarna: Kotak Merah Hitam' },
             { id: 2, name: 'Celana Jeans Pria', price: 185000, category: 'Pakaian', image: 'https://images.unsplash.com/photo-1542272604-787c9635c53c?w=400', desc: 'Denim stretch berkualitas tinggi, kuat dan stylish.', spec: 'Bahan: Jeans Stretch\nModel: Slim Fit\nWarna: Biru Dongker' },
@@ -385,7 +392,6 @@
         function gotoLogin() { showScreen('screen-login'); }
         function gotoRegister() { showScreen('screen-register'); }
 
-        // LOGIN DENGAN NOMOR HP & PASSWORD
         function handleLoginSubmit(e) {
             e.preventDefault();
             const phone = document.getElementById('login-phone').value.trim();
@@ -421,7 +427,6 @@
             }
         }
 
-        // PENDAFTARAN ATAU RESET PASSWORD OTOMATIS
         function handleRegisterSubmit(e) {
             e.preventDefault();
             const phone = document.getElementById('reg-phone').value.trim();
@@ -459,7 +464,6 @@
             setupRandomBanner();
         }
 
-        // TAB NAV RAPI
         function switchBuyerTab(tab) {
             ['nav-cat', 'nav-ord', 'nav-status', 'nav-kasbon', 'nav-pro'].forEach(id => {
                 const el = document.getElementById(id);
@@ -541,7 +545,6 @@
             grid.innerHTML = html || `<p class="text-center text-gray-400 text-xs col-span-2 py-8">Tidak ada produk dalam kategori "${activeCategory}".</p>`;
         }
 
-        // BUKA HALAMAN DETAIL PRODUK
         function viewProductDetail(id) {
             const prod = products.find(p => p.id === id);
             if(!prod) return;
@@ -560,7 +563,6 @@
             showScreen('screen-product-detail');
         }
 
-        // MODAL CHECKOUT
         function openCheckoutModal(id, name, price) {
             selectedProductForCheckout = { id, name, price };
             document.getElementById('modal-prod-name').innerText = name;
@@ -580,7 +582,7 @@
             
             let vaInfo = '';
             if (payMethod.includes('VA')) {
-                let prefix = '88888'; // Default BRIVA
+                let prefix = '88888';
                 if (payMethod.includes('Mandiri')) prefix = '89888';
                 else if (payMethod.includes('BNI')) prefix = '82777';
                 else if (payMethod.includes('BCA')) prefix = '70012';
@@ -641,7 +643,6 @@
             switchBuyerTab(payMethod === 'Kasbon' ? 'kasbon' : 'status');
         }
 
-        // 1. RENDER RIWAYAT NOTA PESANAN
         function renderBuyerOrders() {
             const list = document.getElementById('buyer-orders-list');
             const myOrders = orders.filter(o => o.customer === (buyerSession ? buyerSession.name : ''));
@@ -663,7 +664,6 @@
             list.innerHTML = html || '<p class="text-center text-gray-400 text-xs py-8">Belum ada riwayat nota pesanan.</p>';
         }
 
-        // 2. RENDER STATUS PESANAN & LACAK LOGISTIK
         function renderBuyerStatus() {
             const list = document.getElementById('buyer-status-list');
             const myOrders = orders.filter(o => o.customer === (buyerSession ? buyerSession.name : ''));
@@ -705,7 +705,6 @@
             list.innerHTML = html || '<p class="text-center text-gray-400 text-xs py-8">Belum ada status pesanan aktif.</p>';
         }
 
-        // 3. RENDER KHUSUS KASBON & JATUH TEMPO
         function renderBuyerKasbon() {
             const list = document.getElementById('buyer-kasbon-list');
             const myKasbonOrders = orders.filter(o => o.customer === (buyerSession ? buyerSession.name : '') && o.payment === 'Kasbon');
