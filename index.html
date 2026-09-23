@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maztri Olenshop - Aplikasi Terpadu (Admin, SPV, Buyer)</title>
     
+    <!-- PWA & Mobile Meta Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Maztri Olenshop">
+    <link rel="apple-touch-icon" href="icon-192.png">
+
     <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -401,7 +409,7 @@
 
             <main class="flex-1 overflow-y-auto p-8 bg-gray-50">
                 
-                <!-- 1. DASHBOARD / BERANDA UTAMA (STATUS PEKERJAAN BELUM DIKERJAKAN) -->
+                <!-- 1. DASHBOARD / BERANDA UTAMA -->
                 <section id="tab-dashboard" class="admin-tab space-y-6">
                     <div class="bg-indigo-50 border border-indigo-100 p-4 rounded-2xl flex items-center justify-between shadow-sm">
                         <div>
@@ -411,32 +419,27 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                        <!-- TUGAS 1: Belum Verifikasi Tunai / Cash -->
                         <div onclick="switchAdminTab('cash')" class="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100 hover:border-emerald-400 cursor-pointer transition flex items-center space-x-4 group">
                             <div class="w-12 h-12 rounded-xl bg-emerald-50 group-hover:bg-emerald-600 group-hover:text-white text-emerald-600 transition flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-money-bill-wave"></i></div>
                             <div><p class="text-[10px] font-bold text-gray-400 uppercase">Belum Verifikasi Tunai</p><h3 id="stat-pending-cash" class="text-2xl font-bold text-gray-800 mt-1">0</h3></div>
                         </div>
 
-                        <!-- TUGAS 2: Belum Verifikasi Mutasi QRIS -->
                         <div onclick="switchAdminTab('noncash')" class="bg-white p-6 rounded-2xl shadow-sm border border-blue-100 hover:border-blue-400 cursor-pointer transition flex items-center space-x-4 group">
                             <div class="w-12 h-12 rounded-xl bg-blue-50 group-hover:bg-blue-600 group-hover:text-white text-blue-600 transition flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-building-columns"></i></div>
                             <div><p class="text-[10px] font-bold text-gray-400 uppercase">Belum Verifikasi QRIS</p><h3 id="stat-pending-qris" class="text-2xl font-bold text-gray-800 mt-1">0</h3></div>
                         </div>
 
-                        <!-- TUGAS 3: Pesanan Aktif / Kurir Belum Selesai -->
                         <div onclick="switchAdminTab('delivery')" class="bg-white p-6 rounded-2xl shadow-sm border border-amber-100 hover:border-amber-400 cursor-pointer transition flex items-center space-x-4 group">
                             <div class="w-12 h-12 rounded-xl bg-amber-50 group-hover:bg-amber-600 group-hover:text-white text-amber-600 transition flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-truck-fast"></i></div>
                             <div><p class="text-[10px] font-bold text-gray-400 uppercase">Belum Kirim / Selesai</p><h3 id="stat-pending-delivery" class="text-2xl font-bold text-gray-800 mt-1">0</h3></div>
                         </div>
 
-                        <!-- TUGAS 4: Approval Akun / Cashbond SPV (Jika SPV) / Total Kas -->
                         <div onclick="switchAdminTab('bills')" class="bg-white p-6 rounded-2xl shadow-sm border border-rose-100 hover:border-rose-400 cursor-pointer transition flex items-center space-x-4 group">
                             <div class="w-12 h-12 rounded-xl bg-rose-50 group-hover:bg-rose-600 group-hover:text-white text-rose-600 transition flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-handshake"></i></div>
                             <div><p class="text-[10px] font-bold text-gray-400 uppercase">Cashbond Tertahan</p><h3 id="stat-pending-bills" class="text-2xl font-bold text-gray-800 mt-1">0</h3></div>
                         </div>
                     </div>
 
-                    <!-- TABEL ANTRIAN TUGAS YANG BELUM DIKERJAKAN -->
                     <div class="bg-white rounded-2xl shadow-sm border p-6 space-y-4">
                         <h3 class="font-bold text-gray-800 text-base"><i class="fa-solid fa-list-check text-indigo-600 mr-2"></i> Daftar Pekerjaan Yang Belum Diselesaikan</h3>
                         <table class="w-full text-left text-sm">
@@ -464,7 +467,7 @@
                     </div>
                 </section>
 
-                <!-- TAB PESANAN AKTIF (BELUM SELESAI) -->
+                <!-- TAB PESANAN AKTIF -->
                 <section id="tab-orders" class="admin-tab hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border p-6 overflow-x-auto space-y-4">
                         <div class="flex justify-between items-center">
@@ -591,11 +594,10 @@
                         </div>
                         <button onclick="openProductModal(false)" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-bold"><i class="fa-solid fa-plus mr-1"></i> Posting Produk Baru</button>
                     </div>
-                    <!-- GRID DAGANGAN ADMIN -->
                     <div id="admin-product-grid" class="grid grid-cols-3 gap-4"></div>
                 </section>
 
-                <!-- TAB AKTIVASI LAYANAN PEMBAYARAN -->
+                <!-- TAB AKTIVASI PEMBAYARAN -->
                 <section id="tab-briva" class="admin-tab hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border border-t-4 border-t-orange-500 p-6 max-w-xl space-y-6">
                         <div>
@@ -689,7 +691,7 @@
                     </div>
                 </section>
 
-                <!-- TAB CASHBOND & PIUTANG (SPV APPROVAL & UPLOAD BUKTI) -->
+                <!-- TAB CASHBOND & PIUTANG -->
                 <section id="tab-bills" class="admin-tab hidden space-y-6">
                     <div class="bg-white rounded-2xl shadow-sm border border-t-4 border-t-amber-500 p-6 overflow-x-auto space-y-4">
                         <div>
@@ -769,6 +771,13 @@
         let selectedProductForCheckout = null;
         let paymentMethodsConfig = { qris: true, cash: true, bond: true };
         let currentCategoryFilter = 'semua';
+
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed: ', err));
+            });
+        }
 
         window.showNotification = function(message, isError = false) {
             const toast = document.createElement('div');
@@ -929,9 +938,7 @@
 
             if (fileInput.files && fileInput.files[0]) {
                 const reader = new FileReader();
-                reader.onload = function(evt) {
-                    processUpdate(evt.target.result);
-                };
+                reader.onload = function(evt) { processUpdate(evt.target.result); };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
                 processUpdate(selfie);
@@ -1032,9 +1039,7 @@
             
             let buyerAddress = currentUser.address || 'Alamat belum diatur';
             const matchedBuyer = approvedBuyers.find(b => b.name === currentUser.name || b.phone === currentUser.phone);
-            if (matchedBuyer && matchedBuyer.address) {
-                buyerAddress = matchedBuyer.address;
-            }
+            if (matchedBuyer && matchedBuyer.address) buyerAddress = matchedBuyer.address;
 
             const orderData = {
                 id: newOrdId,
@@ -1057,10 +1062,8 @@
         window.openOrderItemsModal = function(orderId) {
             const order = globalOrders.find(o => o.id === orderId);
             if (!order) return;
-            
             let itemsHtml = '';
             const items = order.items || [{ name: 'Produk Pesanan Umum', price: order.total, image: 'https://images.unsplash.com/photo-1556742049-0a67d55362e8' }];
-            
             items.forEach(item => {
                 itemsHtml += `
                     <div class="flex items-center space-x-3 bg-gray-50 p-2.5 rounded-xl border">
@@ -1072,7 +1075,6 @@
                     </div>
                 `;
             });
-
             document.getElementById('order-items-content').innerHTML = itemsHtml;
             document.getElementById('order-modal-total').innerText = `Rp ${Number(order.total).toLocaleString('id-ID')}`;
             document.getElementById('order-items-modal').classList.remove('hidden');
@@ -1106,8 +1108,7 @@
                         <div class="info-row"><b>ID Pesanan:</b> ${orderId}</div>
                         <div class="info-row"><b>Metode Pembayaran:</b> ${orderPayment} (Rp ${Number(orderTotal).toLocaleString('id-ID')})</div>
                         <div class="info-row" style="margin-top: 15px;">
-                            <b>Kepada Yth. Penerima:</b><br>
-                            <span style="font-size: 16px; font-weight: bold;">${customerName}</span>
+                            <b>Kepada Yth. Penerima:</b><br><span style="font-size: 16px; font-weight: bold;">${customerName}</span>
                         </div>
                         <div class="info-row">
                             <b>Alamat Pengiriman Lengkap:</b>
@@ -1123,9 +1124,7 @@
 
         window.confirmReceiveOrder = function(orderId) {
             if (confirm("Konfirmasi bahwa pesanan ini telah Anda terima dengan baik?")) {
-                window.update(window.ref(window.db, 'orders/' + orderId), {
-                    delivery: 'Diterima Pembeli'
-                }).then(() => {
+                window.update(window.ref(window.db, 'orders/' + orderId), { delivery: 'Diterima Pembeli' }).then(() => {
                     showNotification("Pesanan dikonfirmasi selesai diterima!");
                 });
             }
@@ -1134,10 +1133,7 @@
         window.confirmReturnOrder = function(orderId) {
             const reason = prompt("Masukkan alasan retur atau kendala produk:");
             if (reason !== null && reason.trim() !== "") {
-                window.update(window.ref(window.db, 'orders/' + orderId), {
-                    delivery: 'Selesai Retur',
-                    status: 'Retur: ' + reason.trim()
-                }).then(() => {
+                window.update(window.ref(window.db, 'orders/' + orderId), { delivery: 'Selesai Retur', status: 'Retur: ' + reason.trim() }).then(() => {
                     showNotification("Konfirmasi retur berhasil dikirim!");
                 });
             } else if (reason !== null) {
@@ -1169,12 +1165,7 @@
 
             const reader = new FileReader();
             reader.onload = function(event) {
-                const proofData = {
-                    image: event.target.result,
-                    note: note,
-                    date: new Date().toISOString()
-                };
-
+                const proofData = { image: event.target.result, note: note, date: new Date().toISOString() };
                 window.update(window.ref(window.db, 'orders/' + orderId), {
                     status: 'Menunggu Verifikasi Pelunasan SPV',
                     kasbonProof: proofData
@@ -1247,34 +1238,21 @@
                 let currentDelivery = o.delivery || 'Menunggu Diproses';
                 let isFinished = currentDelivery === 'Diterima Pembeli' || currentDelivery === 'Selesai Retur' || o.status.includes('Ditolak');
                 let actionButtons = '';
-
                 const canConfirm = currentDelivery === 'Menuju Hub Tujuan';
 
                 if (!isFinished) {
                     if (canConfirm) {
                         actionButtons = `
                             <div class="grid grid-cols-2 gap-2 mt-3">
-                                <button onclick="confirmReceiveOrder('${o.id}')" class="py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow transition">
-                                    <i class="fa-solid fa-check mr-1"></i> Pesanan Diterima
-                                </button>
-                                <button onclick="confirmReturnOrder('${o.id}')" class="py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow transition">
-                                    <i class="fa-solid fa-rotate-left mr-1"></i> Retur Produk
-                                </button>
+                                <button onclick="confirmReceiveOrder('${o.id}')" class="py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow transition"><i class="fa-solid fa-check mr-1"></i> Pesanan Diterima</button>
+                                <button onclick="confirmReturnOrder('${o.id}')" class="py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow transition"><i class="fa-solid fa-rotate-left mr-1"></i> Retur Produk</button>
                             </div>
                         `;
                     } else {
-                        actionButtons = `
-                            <div class="mt-3 p-2 bg-amber-50 rounded-xl border border-amber-100 text-center text-[11px] font-semibold text-amber-700">
-                                <i class="fa-solid fa-clock mr-1"></i> Tombol konfirmasi akan muncul setelah paket tiba di "Menuju Hub Tujuan".
-                            </div>
-                        `;
+                        actionButtons = `<div class="mt-3 p-2 bg-amber-50 rounded-xl border border-amber-100 text-center text-[11px] font-semibold text-amber-700"><i class="fa-solid fa-clock mr-1"></i> Tombol konfirmasi akan muncul setelah paket tiba di "Menuju Hub Tujuan".</div>`;
                     }
                 } else {
-                    actionButtons = `
-                        <div class="mt-3 p-2 bg-emerald-50 rounded-xl border border-emerald-100 text-center text-xs font-bold text-emerald-700">
-                            <i class="fa-solid fa-circle-check mr-1"></i> Telah dikonfirmasi (${currentDelivery})
-                        </div>
-                    `;
+                    actionButtons = `<div class="mt-3 p-2 bg-emerald-50 rounded-xl border border-emerald-100 text-center text-xs font-bold text-emerald-700"><i class="fa-solid fa-circle-check mr-1"></i> Telah dikonfirmasi (${currentDelivery})</div>`;
                 }
 
                 html += `
@@ -1363,34 +1341,22 @@
         }
 
         window.approveKasbon = function(id) {
-            if (currentUser.role !== 'supervisor') {
-                showNotification("Akses Ditolak! Hanya SPV.", true);
-                return;
-            }
-            window.update(window.ref(window.db, 'orders/' + id), { status: 'Kasbon Disetujui, Diproses Admin' })
-                .then(() => showNotification(`Cashbond [${id}] Disetujui!`));
+            if (currentUser.role !== 'supervisor') { showNotification("Akses Ditolak! Hanya SPV.", true); return; }
+            window.update(window.ref(window.db, 'orders/' + id), { status: 'Kasbon Disetujui, Diproses Admin' }).then(() => showNotification(`Cashbond [${id}] Disetujui!`));
         };
 
         window.approveKasbonPayment = function(id) {
-            if (currentUser.role !== 'supervisor') {
-                showNotification("Akses Ditolak! Hanya SPV.", true);
-                return;
-            }
+            if (currentUser.role !== 'supervisor') { showNotification("Akses Ditolak! Hanya SPV.", true); return; }
             if (confirm(`Approve pelunasan cashbond untuk No. Order [${id}]? Status akan berubah menjadi Lunas.`)) {
-                window.update(window.ref(window.db, 'orders/' + id), { status: 'Lunas' })
-                    .then(() => showNotification(`Pelunasan Cashbond [${id}] Disetujui! Status Lunas.`));
+                window.update(window.ref(window.db, 'orders/' + id), { status: 'Lunas' }).then(() => showNotification(`Pelunasan Cashbond [${id}] Disetujui! Status Lunas.`));
             }
         };
 
         window.rejectKasbon = function(id) {
-            if (currentUser.role !== 'supervisor') {
-                showNotification("Akses Ditolak! Hanya SPV.", true);
-                return;
-            }
+            if (currentUser.role !== 'supervisor') { showNotification("Akses Ditolak! Hanya SPV.", true); return; }
             const reason = prompt(`Alasan penolakan untuk No. Order [${id}]:`);
             if (reason !== null && reason.trim() !== "") {
-                window.update(window.ref(window.db, 'orders/' + id), { status: 'Kasbon Ditolak', rejectReason: reason.trim() })
-                    .then(() => showNotification("Cashbond Ditolak."));
+                window.update(window.ref(window.db, 'orders/' + id), { status: 'Kasbon Ditolak', rejectReason: reason.trim() }).then(() => showNotification("Cashbond Ditolak."));
             }
         };
 
@@ -1427,9 +1393,7 @@
                 let isCompleted = (o.delivery === 'Diterima Pembeli' || o.delivery === 'Selesai Retur' || o.status.includes('Ditolak') || o.status === 'Lunas');
 
                 if (o.status === 'Lunas') {
-                    if (o.payment === 'Cash') {
-                        totalCashReceived += o.total;
-                    }
+                    if (o.payment === 'Cash') totalCashReceived += o.total;
                 } else {
                     if (o.payment === 'Cash') pendingCashCount++;
                     else if (o.payment === 'QRIS') pendingQrisCount++;
@@ -1440,11 +1404,8 @@
                     totalPendingKasbonValue += o.total;
                 }
 
-                if (!isCompleted && o.delivery !== 'Diterima Pembeli') {
-                    pendingDeliveryCount++;
-                }
+                if (!isCompleted && o.delivery !== 'Diterima Pembeli') pendingDeliveryCount++;
 
-                // Masukkan ke tabel todo beranda jika belum selesai/belum lunas
                 if (!isCompleted || o.status !== 'Lunas') {
                     let taskTypeBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-700">${o.payment} (${o.status})</span>`;
                     let actionBtnTodo = '';
@@ -1516,20 +1477,14 @@
                 let approveTimeLog = o.approveTime || '23 Sep 2026, 08:35 WIB';
 
                 if (o.payment === 'Cash') {
-                    let cashActionCol = '';
-                    if (currentUser && currentUser.role === 'supervisor') {
-                        cashActionCol = `<td class="p-3 text-right font-mono text-xs font-bold text-indigo-700 bg-indigo-50/50 rounded-lg">${o.status === 'Lunas' ? approveTimeLog : 'Belum Diverifikasi'}</td>`;
-                    } else {
-                        cashActionCol = `<td class="p-3 text-right"><button onclick="verifyCash('${o.id}')" class="bg-emerald-600 text-white px-3 py-1 rounded text-xs font-bold">Terima Uang</button></td>`;
-                    }
+                    let cashActionCol = currentUser && currentUser.role === 'supervisor' ? 
+                        `<td class="p-3 text-right font-mono text-xs font-bold text-indigo-700 bg-indigo-50/50 rounded-lg">${o.status === 'Lunas' ? approveTimeLog : 'Belum Diverifikasi'}</td>` :
+                        `<td class="p-3 text-right"><button onclick="verifyCash('${o.id}')" class="bg-emerald-600 text-white px-3 py-1 rounded text-xs font-bold">Terima Uang</button></td>`;
                     cashHtml += `<tr class="border-b"><td class="p-3">${o.id}</td><td class="p-3">${o.customer}</td><td class="p-3">Rp ${o.total.toLocaleString('id-ID')}</td><td class="p-3">${o.status}</td>${cashActionCol}</tr>`;
                 } else if (o.payment === 'QRIS') {
-                    let nonCashActionCol = '';
-                    if (currentUser && currentUser.role === 'supervisor') {
-                        nonCashActionCol = `<td class="p-3 text-right font-mono text-xs font-bold text-indigo-700 bg-indigo-50/50 rounded-lg">${o.status === 'Lunas' ? approveTimeLog : 'Belum Diverifikasi'}</td>`;
-                    } else {
-                        nonCashActionCol = `<td class="p-3 text-right"><button onclick="verifyCash('${o.id}')" class="bg-blue-600 text-white px-3 py-1 rounded text-xs font-bold">Verifikasi</button></td>`;
-                    }
+                    let nonCashActionCol = currentUser && currentUser.role === 'supervisor' ? 
+                        `<td class="p-3 text-right font-mono text-xs font-bold text-indigo-700 bg-indigo-50/50 rounded-lg">${o.status === 'Lunas' ? approveTimeLog : 'Belum Diverifikasi'}</td>` :
+                        `<td class="p-3 text-right"><button onclick="verifyCash('${o.id}')" class="bg-blue-600 text-white px-3 py-1 rounded text-xs font-bold">Verifikasi</button></td>`;
                     nonCashHtml += `<tr class="border-b"><td class="p-3">${o.id}</td><td class="p-3">${o.customer}</td><td class="p-3">Rp ${o.total.toLocaleString('id-ID')}</td><td class="p-3">${o.payment}</td>${nonCashActionCol}</tr>`;
                 }
 
@@ -1610,7 +1565,6 @@
             document.getElementById('delivery-table').innerHTML = devHtml || '<tr><td colspan="4" class="text-center py-4 text-gray-400">Tidak ada logistik.</td></tr>';
             document.getElementById('dashboard-todos-table').innerHTML = dashboardTodosHtml || '<tr><td colspan="5" class="text-center py-6 text-gray-400">Hore! Tidak ada pekerjaan yang belum dikerjakan saat ini.</td></tr>';
             
-            // Set statistik kartu di Beranda Utama
             document.getElementById('stat-pending-cash').innerText = pendingCashCount;
             document.getElementById('stat-pending-qris').innerText = pendingQrisCount;
             document.getElementById('stat-pending-delivery').innerText = pendingDeliveryCount;
@@ -1625,16 +1579,11 @@
         window.verifyCash = function(id) {
             const now = new Date();
             const timeString = `${now.getDate()} ${['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'][now.getMonth()]} ${now.getFullYear()}, ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')} WIB`;
-            
-            window.update(window.ref(window.db, 'orders/' + id), { 
-                status: 'Lunas',
-                approveTime: timeString
-            }).then(() => showNotification("Transaksi dilunasi & waktu tercatat!"));
+            window.update(window.ref(window.db, 'orders/' + id), { status: 'Lunas', approveTime: timeString }).then(() => showNotification("Transaksi dilunasi & waktu tercatat!"));
         }
 
         window.updateDelivery = function(id, status) {
-            window.update(window.ref(window.db, 'orders/' + id), { delivery: status })
-                .then(() => showNotification("Status pengiriman diperbarui!"));
+            window.update(window.ref(window.db, 'orders/' + id), { delivery: status }).then(() => showNotification("Status pengiriman diperbarui!"));
         }
 
         function savePaymentActivation() {
